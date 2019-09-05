@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+	$('p').on('click', function(){
+		$(this).css('font-size', '+=5px');
+	})
+	
+	$('#remove').on('click', function(){
+		//a = $('#p1').remove();
+		//$(a).appendTo('body');
+		$('div').remove();
+	})
+	
+	$('#empty').on('click', function(){
+		a = $('#p2').empty();
+// 		$(a).appendTo('body');
+// 		$('div').empty(); // div 안에 있는 모든게 삭제
+	})
+	
+	$('#detach').on('click', function(){
+		a = $('#p3').detach();
+		$(a).appendTo('body');
+	})
+	
+	$('#clone').on('click', function(){
+// 		a = $('#p1').clone();
+// 		$(a).appendTo('body');
+		 $('#p1').clone().appendTo('body'); // chan 사용 가능
+	})
+	
+	$('#clonetrue').on('click', function(){
+		a = $('#p2').clone(true);
+		$(a).appendTo('body');
+	})
+})
+</script>
+<style>
+	div{
+		background:yellow;
+	}
+</style>
+</head>
+<body>
+<pre>
+  remove() : 대상 태그를 삭제, 이벤트 핸들러도 삭제
+  empty() : 대상 태그 안에 있는 모든 것 삭제
+  detach() : 대상 태그를 삭제, 해당 이벤트 핸들러는 삭제 되지 않는다.
+  
+  clone() : 이벤트 핸들러를 제외하고 복사
+  clone(true) : 이벤트 핸들러를 포함해서 복사
+</pre>
+<div>
+	<p id="p1">무궁화 꽃이 피었습니다.</p>
+	<p id="p2">추석이 다가오고 있어요.</p>
+	<p id="p3">추석이 즐거우신가요??</p>
+	<button id="remove" type="button">remove</button>
+	<button id="empty" type="button">empty</button>
+	<button id="detach" type="button">detach</button>
+	<br><br>
+	<button id="clone" type="button">clone</button>
+	<button id="clonetrue" type="button">clonetrue</button>
+</div>
+</body>
+</html>

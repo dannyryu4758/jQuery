@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet", href="../css/mystyle.css">
+<script src ="../js/jquery-3.4.1.min.js"></script>
+<script>
+	$(function(){
+// 		$('button').bind('click', function(){})
+// 		$('button').click(function(){})
+		$('button').on('click', function(){
+			newele = $('<p>무궁화 꽃이 피었습니다.</p>');
+			// newele.appendTo('body');
+			$('body').append(newele);
+		})		
+		
+// 		==================================================
+		
+// 		$('body').delegate('p', 'click', function(){
+// 			$(this).css('font-size', '+=5px');
+// 		})
+		$('body').on('click', 'p', function(){
+			var r = parseInt(Math.random()*255)
+			var g = Math.floor(Math.random()*255)
+			var b = parseInt(Math.random()*255)
+			$(this).css('color', 'rgb(' + r + ',' + g + ',' + b + ')');
+		})
+	})
+</script>
+</head>
+<body>
+<pre>
+  이벤트 핸들러 작성(등록) 방법
+	1) bind : body 태그 안에 실행 전부터 이미 만들어져 있는 요소
+		$('p').bind('click', function(){})
+		$('p').on('click', function(){})
+		$('p').click(function(){})
+	2) delegate : 실행 후 새롭게 동적으로 만들어지는 요소
+		$('부모태그').on('click', '대상태그', function(){}) 
+			ex) $('body').delegate('p', 'click', function(){})
+		$('부모태그').delegate('대상태그', 'click', function(){})
+			ex) $('body').on('click', 'p', function(){})
+</pre>
+	<button type="button">새로 만들기</button>
+</body>
+</html>

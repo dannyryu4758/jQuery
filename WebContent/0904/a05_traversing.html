@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<style>
+	.ancestors  { 
+	  display: block;
+	  border: 2px solid lightgrey;
+	  color: lightgrey;
+	  padding: 5px;
+	  margin: 15px;
+	}
+	
+	.siblings * { 
+	  display: block;
+	  border: 2px solid lightgrey;
+	  color: lightgrey;
+	  padding: 5px;
+	  margin: 15px;
+	}
+</style>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+	$('#parent').on('click', function(){
+		$('span').parent
+		().css('border', '1px solid red');
+	})
+	
+	$('#parents').on('click', function(){
+		$('span').parents().css('border', '1px solid green');
+	})
+	
+	$('#parentpara').on('click', function(){
+		$('span').parents('ul').css('border', '2px solid blue');
+	})
+	
+	$('#parentsUntil').on('click', function(){
+		$('span').parentsUntil('div').css('border', '2px solid hotpink');
+	})
+	
+	$('span').on('click', function(){
+		// 부모들 중 ul을 선택한다.
+		$(this).parents('ul').css('border', '3px solid black');
+	})
+	
+	
+	
+})
+</script>
+</head>
+<body class="ancestors">body (great-great-grandparent)
+  <div style="width:500px;" class="siblings"> div (great-grandparent)
+    <ul>ul (grandparent)  
+      <li>li (direct parent)
+        <span>span</span>
+      </li>
+    </ul>   
+  </div>
+  
+  <div style="width:500px;" class="siblings"> div (great-grandparent)
+    <ul>ul (grandparent)  
+      <li>li (direct parent)
+        <span>span</span>
+      </li>
+    </ul>   
+  </div>
+  
+  <div style="width:500px;" class="siblings"> div (great-grandparent)
+    <ul>ul (grandparent)  
+      <li>li (direct parent)
+        <span>span</span>
+      </li>
+    </ul>   
+  </div>
+  
+  <div style="width:500px;" class="siblings"> div (great-grandparent)
+    <ul>ul (grandparent)  
+      <li>li (direct parent)
+        <span>span</span>
+      </li>
+    </ul>   
+  </div>
+  <button id="parent" type="button">parent</button>
+  <button id="parents" type="button">parents</button>
+  <button id="parentpara" type="button">parents_</button>
+  <button id="parentsUntil" type="button">parentsUntil</button>
+</body>
+</html>

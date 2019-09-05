@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+pre{
+	font-size: 1.3em;
+	background : #efefef;
+	padding : 10px;
+	margin : 10px;
+	border-top : 1px solid gray;
+	border-bottom : 1px solid gray;
+}
+
+div{
+	height : auto;
+	padding : 20px;
+	margin : 5px;
+	border : 1px dotted orange;
+}
+
+.box{
+	background : #efefef;
+	font-size : 1.2em;
+	border : none;
+	border-top : 1px solid gray;
+	border-bottom : 1px solid gray;
+}

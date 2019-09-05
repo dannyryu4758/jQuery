@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src ="../js/jquery-3.4.1.min.js"></script>
+<script>
+	$(function(){
+// 		var aa = $('h1');
+// 		aa.css('color', 'blue');	// aa = jQuery 객체 변수
+
+		var aa = document.getElementsByTagName('h1');	// aa : dom 객체 변수
+		
+		// aa.css('color', 'blue'); ==> 오류 발생
+		aa[0].style.color = 'green'; // 배열구조에서 전체에 style 구조를 줄 수 없다.
+		
+		//============dom객체와 jQuery객체 비교===========================================
+			
+		// dom 객체를 $()로 감싸주면 jQuery 변수로 변환된다.
+		// 그러므로 css() jQuery 함수를 호출할 수 있다. 
+		$(aa).eq(1).css('color', 'red');	// jQuery에서는 배열에서 선택할때는 eq(n)을 사용한다.
+	})
+</script>
+</head>
+<body>
+	<h1>무궁화 꽃이 피었습니다.</h1>
+	<h1>무궁화 꽃이 피었습니다.</h1>
+	<h1>무궁화 꽃이 피었습니다.</h1>
+	<h1>무궁화 꽃이 피었습니다.</h1>
+	<h1>무궁화 꽃이 피었습니다.</h1>
+</body>
+</html>

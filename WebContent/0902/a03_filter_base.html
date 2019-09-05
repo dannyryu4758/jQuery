@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+<script>
+$(function(){
+	$('li:first').css('background','yellow');
+	$('li:lt(4)').css({'font-size' : '1.5em' , 'font-weight' : 'bold'});
+	$('li:eq(5)').css('background', 'red');
+	$('li:last').css('background','yellow');
+	
+	$('tr:even').css('background', 'lightblue');
+	$('tr:odd').css('background', 'lightgray');
+	
+// 	first가 위에서 적용되면 다른 효과가 덮어서 없어지기 때문에 마지막에 적용해줘야 한다.
+	$('tr:first').css('background', 'black')	
+				 .css('color' , 'white');  
+})
+</script>
+<style>
+	table{
+/* 		margin-left:200px; */
+		margin:10px auto;
+		border-collapse:separate;
+		border-spacing : 10px;
+	}
+	
+	td{
+	width:300px;
+	height:50px;
+	text-align:center;
+	}
+</style>
+</head>
+<body>
+ <ul>
+	<li> one </li>
+	<li> two </li>
+	<li>  three </li>
+	<li> four </li>
+	<li> five </li>
+	<li> six</li>
+	<li> seven</li>
+	<li>eight</li>
+	<li>nine</li>
+ </ul>
+ 
+ <table border="1">
+ 	<tr>
+ 		<td>one</td><td>62만원</td>
+ 	</tr>
+ 	<tr>
+ 		<td>two</td><td>45만원</td>
+ 	</tr>
+ 	<tr>
+ 		<td>three</td><td>33만원</td>
+ 	</tr>
+ 	<tr>
+ 		<td>four</td><td>72만원</td>
+ 	</tr>
+ 	<tr>
+ 		<td>five</td><td>77만원</td>
+ 	</tr>
+ 	<tr>
+ 		<td>six</td><td>54만원</td>
+ 	</tr>
+ 	<tr>
+ 		<td>seven</td><td>61만원</td>
+ 	</tr>
+ 	<tr>
+ 		<td>eight</td><td>52만원</td>
+ 	</tr>
+ 	<tr>
+ 		<td>nine</td><td>88만원</td>
+ 	</tr>
+ </table>
+ 
+  <table border="1">
+ 	<tr>
+ 		<td>이름</td><td>주소</td>
+ 	</tr>
+ 	<tr>
+ 		<td>홍길동</td><td>대전</td>
+ 	</tr>
+ 	<tr>
+ 		<td>진달래</td><td>서울</td>
+ 	</tr>
+ 	<tr>
+ 		<td>개나리</td><td>부산</td>
+ 	</tr>
+ 	<tr>
+ 		<td>무궁화</td><td>대구</td>
+ 	</tr>
+  </table>
+</body>
+</html>

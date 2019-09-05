@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+	$('#checkAll').on('change', function(){
+		a = $(this).prop('checked');
+		$('.check').prop('checked', a);
+		
+	})
+
+})
+</script>
+</head>
+<body>
+	<div class="box">
+		<h3>prop</h3>
+		속성이름 없이 사용되는 속성을 설정하거나 설정 여부를 알 수 있는 메소드<br>
+		(예: checked, selected, disabled, readonly, multiple )
+		<br>
+		$(selector).prop("속성명", 값); setter역할 <br>
+		 ==> 값은 true, false로 설정한다.
+		 <br>
+		$(selector).prop("속성명"); getter역할 <br>
+		 ==> 현재 속성 값이 true 인지 false 인지를 반환
+		 <br><br>
+		 <input type="checkbox" id="checkAll">전체선택
+		 <br>
+		 <input type="checkbox" class="check">1번
+		 <input type="checkbox" class="check">2번
+		 <input type="checkbox" class="check">3번
+		 <input type="checkbox" class="check">4번
+		 <input type="checkbox" class="check">5번
+	</div>
+</body>
+</html>

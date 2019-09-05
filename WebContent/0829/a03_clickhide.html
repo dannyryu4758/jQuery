@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script>
+	$(function(){
+		$('h1').on('click', function(){	// callback 메소드 (클릭하면 자동 실행)
+			// $(this).css('display', 'none');
+			$(this).hide();
+			
+			if($('h1:visible').length == 0){		// : --> 필터 (띄워쓰기 하지 않는다.)
+				// $('button').css('display', 'block');
+				$('button').show();
+			}
+		})
+		
+		$('button[type=button]').on('click', function(){
+			$('h1').show();
+			$(this).hide();
+		})
+		
+	})
+</script>
+<style>
+	button{
+		display : none;
+	}
+</style>
+</head>
+<body>
+<h1>클릭하면 사라집니다.1</h1>
+<h1>클릭하면 사라집니다.2</h1>
+<h1>클릭하면 사라집니다.3</h1>
+<h1>클릭하면 사라집니다.4</h1>
+<h1>클릭하면 사라집니다.5</h1>
+<h1>클릭하면 사라집니다.6</h1>
+<h1>클릭하면 사라집니다.7</h1>
+<h1>클릭하면 사라집니다.8</h1>
+<h1>클릭하면 사라집니다.9</h1>
+<h1>클릭하면 사라집니다.10</h1>
+
+<button type ="button">보이기</button>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+// 	$('span').on('click', function(){
+// // 		event.stopPropagation();    // ******* (순서는 무관하다) 
+// 		$(this).css('background', 'red');
+// 		return false; // event.stopPropagation() 대신 사용가능하나 순서는 맨 밑에 가야한다.
+// 	})
+	
+	$('h1').on('click', function(){
+		$(this).css('background', 'lightgreen');
+	})
+	
+	$('div').click(function(){
+		alert("div");	
+	})
+
+	$('#sp1').click(function(){
+		alert("span");	
+		return false;
+	})
+	
+	$('button').click(function(){
+		alert("button");	
+		return false;
+	})
+})
+</script>
+<style type="text/css">
+	div{
+		width : 300px;
+		height : 300px;
+		background : pink;
+		// padding :20px;
+	}
+	#sp1{		 
+		display : inline-block;
+		width : 150px;
+		height : 150px;
+		background : yellow;
+		padding :20px;
+	}
+	
+</style>
+</head>
+<body>
+	<h1> 큰제목안에 <span> 작은 영역</span>이 있다</h1> 
+	<hr>
+	<br><br>
+	<div> 
+		<span id="sp1"> 
+			<button> 클릭하세요</button>  
+		</span>
+	</div>
+	<br>
+	<hr color="red"><br>
+<a href="http://www.daum.net">Daum사이트 가기</a>
+	
+</body>
+</html>

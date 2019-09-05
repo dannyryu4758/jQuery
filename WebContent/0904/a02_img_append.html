@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+	$('p').on('click', function(){
+		name = $(this).attr('title');
+		$('<img>', {
+			'src' : '../images/' + name + '.jpg'
+		//}).appendTo(this);
+		//}).prependTo(this);
+		//}).insertAfter(this);
+		}).insertBefore(this);
+	})
+})
+</script>
+<style type="text/css">
+	img{
+		width : 100px;
+		height : 100px;
+	}
+</style>
+</head>
+<body>
+<pre>
+1. p를 클릭하면 attr('title'), text()
+2. 새로운 img를 생성해서 현재클릭한 p요소의 안쪽 끝으로 붙인다.
+</pre>
+	<p title="Tulips">튜울립</p>
+ 	<p title="Chrysanthemum">국화</p>
+  	<p title="Koala">코알라</p>
+  	<p title="Hydrangeas">수국</p>  
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src ="../js/jquery-3.4.1.min.js"></script>
+<script>
+	$(function(){
+		// bind 방식 : 만들어져 있는 요소를 가지고 이벤트 핸들러를 등록/연결하는 방식
+		// <-> delegate : 만들어져 있지 않은 요소를 이벤트 핸들러를 통해 만들때 
+		
+		// $('p').on('click', function(){})  
+// 		$('p').click(function(){
+// 			$(this).css('font-size', '+=5px');
+// 		})
+		
+		$('div').click(function(){
+			// $('p').css('font-size', '+=5px'); ==> 모든 'p'가 선택되어 적용된다.
+			$('p',this).css('font-size', '+=5px');
+		})
+	})
+</script>
+<style>
+	div{
+		background : pink;
+		padding : 10px;
+		margin : 10px;
+	}
+</style>
+</head>
+<body>
+	<p> 장미꽃이 피었습니다.</p>
+	<div>
+		<p>무궁화 꽃이 피었습니다.</p>
+	</div>
+	<div>
+		<p>무궁화 꽃이 피었습니다.</p>
+	</div>
+	<div>
+		<p>무궁화 꽃이 피었습니다.</p>
+	</div>
+</body>
+</html>

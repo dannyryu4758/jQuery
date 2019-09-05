@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script>
+$(function(){
+	$('p').css('color', 'blue');
+	
+	$('p:eq(2)').css('color', 'red');
+	
+// 	a = $('p').get(4);
+	a = $('p')[4];	// ==> dom 객체를 받는다.
+	a.style.color = 'green';
+	$(a).css('background', 'yellow');
+})
+</script>
+</head>
+<body>
+<p>무궁화 꽃이 피었습니다.</p>
+<p>무궁화 꽃이 피었습니다.</p>
+<p>무궁화 꽃이 피었습니다.</p>
+<p>무궁화 꽃이 피었습니다.</p>
+<p>무궁화 꽃이 피었습니다.</p>
+<p>무궁화 꽃이 피었습니다.</p>
+<p>무궁화 꽃이 피었습니다.</p>
+<p>무궁화 꽃이 피었습니다.</p>
+</body>
+</html>

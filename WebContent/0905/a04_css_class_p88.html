@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>PPT p.88</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+	
+// 	$('p').hover(function(){
+// 		$(this).addClass('back');
+// 	}, function(){
+// 		$(this).removeClass('back');
+// 	})
+	
+	
+// 	$('p').click(function(){  // ==>  show, hide 번갈아가며 실행
+// 		$(this).toggleClass('back');
+// 	})
+	
+	
+	// toggleClass 와 동일한 기능 만들기
+	$('p').click(function(){
+		if($(this).hasClass('back')){
+			$(this).removeClass('back');
+		}else{
+			$(this).addClass('back');
+		}
+	})
+	
+	
+})
+</script>
+<style type="text/css">
+	.back{
+		background: crimson;
+	}
+</style>
+</head>
+<body>
+	<p>오늘 점심 뭐 먹지?</p>
+	<p>민정이 따라서 갈 사람??</p>
+	<p>무구화 꽃이 피어 있는 곳으로...</p>
+</body>
+</html>

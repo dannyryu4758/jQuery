@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+
+<script type="text/javascript">
+$(function(){
+	$('button').on('click', function(){
+// 	$('button[type=button]').on('click', function({
+		$('div').eq(1).css('border', '2px solid green')
+						.siblings().css('border', '3px solid hotpink')
+						.end().next().text("세번째 third")
+						.end().nextAll().css('background', 'yellow')
+						.end().prev().css('background', 'green');
+	})
+})
+</script>
+<style>
+	div {
+	   width: 60px;
+	   height: 60px;
+	   margin: 10px;
+	   float: left;
+	   border: 2px solid blue;
+	}
+	
+	br{
+		clear : both;
+	}
+</style>
+</head>
+<body>
+	<div>a</div>
+	<div>b</div>
+	<div>c</div>
+   	<div>d</div>
+   	<div>e</div>
+   	<div class="orange">f</div>
+   	<div>g</div>
+   	
+   	<br><br>
+   	
+   	<button type="button">실행</button>
+</body>
+</html>

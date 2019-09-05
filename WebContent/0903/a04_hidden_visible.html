@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>힌든이나 비지블인 속성 찾기</title>
+<link rel="stylesheet" href="../css/mystyle.css">
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#hidden').on('click', function(){
+		res = "hidden 결과 <br>";
+		$('#testForm :hidden').each(function(){
+			if(this.tagName == 'INPUT'){
+				res += "input hidden : [" + $(this).attr('name');
+				res += " : " + $(this).val() + "]<br>";
+			} else{
+				res += $(this).text() + "<br>";
+			}
+			$('#result1').html(res);
+		})
+	})
+	
+	$('#visible').on('click', function(){
+		res = "visible 결과 <br>";
+		$('#testForm :visible').each(function(){
+			if(this.tagName == 'INPUT'){
+				res += "input visible : [" + $(this).attr('name');
+				res += " : " + $(this).val() + "]<br>";
+			} else{
+				res += $(this).text() + "<br>";
+			}
+			$('#result2').html(res);
+		})
+	})
+})
+
+</script>
+</head>
+<pre>
+</pre>
+<body>
+	<form id="testForm"> 
+		<input type="hidden" name="userAge" value="33">
+		<input type="hidden" name="userCity" value="대전">
+		
+		I D : 
+		<input type="text" name="userID" value="hong">  
+		<span style="display:none">ID가 중복됩니다. </span> <br>  
+		
+		이름 : 
+		<input type="text" name="userName" value="홍길동">   
+		<span style="visibility:hidden">이름을 입력하세요</span><br>  
+		
+		성별 : 
+		<input type="radio" name="sung" value="남" checked>남자  
+		<input type="radio" name="sung" value="여">여자  
+	</form>
+	<br><br>
+	<button type="button" id="hidden">Hidden</button>
+	<button type="button" id="visible">Visible</button>
+	<br><br>
+	<div id = "result1"></div>
+	<div id = "result2"></div>
+</body>
+</html>

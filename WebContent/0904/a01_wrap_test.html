@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+
+<style>
+ div{
+    background : yellow;
+ }
+
+/* 한번 누르면 감싸지고 한번 누르면 해제 */
+ .cwrap{
+    background : pink;
+ }
+</style>
+<script type="text/javascript">
+ $(function(){
+    $('#wrap').on('click', function(){
+       $('p').wrap('<div/>');
+    })
+    
+    $('#wrapAll').on('click', function(){
+       $('p').wrapAll('<div/>');
+    })
+    
+    $('#unwrap').on('click', function(){
+       $('p').unwrap();
+    })
+    
+//     $('p').on('click', function(){
+//        $(this).wrap('<div/>');
+//        $(this).unwrap()
+//     })
+    
+    /* 한번 누르면 백그라운드 설정 한번 누르면 해제 */
+    $('p').on('click', function(){
+       $(this).toggleClass('cwrap');
+    })
+   
+    //hover는 function을 2개 갖고 있다 마우스를 올리면 / 마우스를 내리면
+    $('p').hover(function(){
+      // mouseover
+      // $(this).wrap('<div/>');
+      $(this).addClass('cwrap');
+    }, function(){
+       // mouseout
+       // $(this).unwrap();
+      $(this).removeClass('cwrap');
+    })
+ })
+</script>
+</head>
+<body>
+ <pre>
+ wrap()/ wrapAll()
+   - $(selector).wrap(html태그) :selector 요소들을 html태그로 감싸라
+   - $('p').wrap('&lt;div/&gt;') : 각 p요소를 각각 div로 감싸기 <br> 
+   - $('p').wrapAll('&lt;div/&gt;') : p요소 전체를 하나의 div로 감싸기 <br> 
+   
+ toggleClass() <- add클래스 remove클래스 한번에 한다고 생각 
+   : addClass('class이름'), removeClass('class이름')를 번갈아 가면서 수행
+     - style에 class를 미리 등록 시킨다.
+     
+ hover(function(){}, function(){}) 
+   : mouseover, mouseout 을 실행
+ </pre>
+ 
+ <p>비가 옵니다</p>
+ <p>주룩주룩 주루룩 옵니다.</p>
+ <p>비 온다고 형준이는 지각을...</p>
+ <span>여기는 span</span>
+ <a>여기는 a태그</a>
+ <p>비가오나 눈이오나 지각은 절대 안됨.</p>
+ <br><br>
+ <button id="wrap" type="button">wrap</button>
+ <button id="wrapAll" type="button">wrapAll</button>
+ <button id="unwrap" type="button">unwrap</button>
+</body>
+</html>

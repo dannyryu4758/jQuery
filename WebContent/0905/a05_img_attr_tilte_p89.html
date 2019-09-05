@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> page : 89
+	// 	$('img').attr('title', 'korea');
+
+// 	len = $('img').length;
+// 	for(1=0;i<len;i++){}
+	$('img').each(function(i){
+// 		$(this).attr('title', i+"번째 이미지 입니다.");
+		$(this).attr('title', function(){
+			// src 속성값을 가져온다. a 변수로 받는다.
+			a = $(this).attr('src');
+			// a에서 마지막 '/' 위치와 '.'의 위치를 얻어낸다.
+			start = a.lastIndexOf('/');
+			end = a.lastIndexOf('.');
+			
+			// a 에서 start와 end번 사이의 문자를 추출
+			return a.substring(start+1, end);
+		})
+	})
+	
+	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> page : 96
+
+	// $('img').click(function(){		 
+// 	$('img').bind('click', function(){
+ 	$('img').on('click', function(){
+		r = Math.floor(Math.random()*255);		
+		g = Math.floor(Math.random()*255);		
+		b = Math.floor(Math.random()*255);
+		$(this).css('border', '5px solid rgb('+r+','+g+','+b+')');
+		
+		// $(this).unbind('click');  // ==> 이벤트 해제하기!
+		$(this).off('click');
+	})
+	
+	//======================================
+// 	$('img').one('click', function(){
+// 		r = Math.floor(Math.random()*255);		
+// 		g = Math.floor(Math.random()*255);		
+// 		b = Math.floor(Math.random()*255);
+// 		$(this).css('border', '5px solid rgb('+r+','+g+','+b+')');
+// 	})
+})
+</script>
+<style type="text/css">
+	img{
+		width : 100px;
+		height : 100px;
+	}
+</style>
+</head>
+<body>
+<img src="../images/audio.png">
+<img src="../images/back.jpg">
+<img src="../images/border.png">
+<img src="../images/back005.jpg">
+<img src="../images/키위.jpg">
+<img src="../images/포도.jpg">
+<img src="../images/americano.jpg">
+</body>
+</html>

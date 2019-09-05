@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+	// 홀수 번쩨 div를 선택하시오.
+// 	$('div:odd')
+// 	$('div').filter(':odd').eq(0).css('background', 'lightgreen')
+// 	$('div').filter(':odd').eq(1).css('background', 'lightblue')
+// 	$('div').filter(':odd').eq(2).css('background', 'pink');
+	
+	$('div').filter(':odd').eq(0).css('background', 'lightgreen')
+						   .end().eq(1).css('background', 'lightblue')
+						   .end().eq(2).css('background', 'pink');
+})
+</script>
+<style type="text/css">
+	div { 
+		width:60px;
+	    height:60px;
+	    margin:10px;
+	    float:left;
+	    border:2px solid blue; 
+	} 
+	
+</style>
+</head>
+<pre>
+</pre>
+<body>
+	<div>a</div> 
+	<div>b</div> 
+	<div>c</div> 
+	<div>d</div> 
+	<div>e</div> 
+	<div class="orange">f</div> 
+	<div>g</div>
+</body>
+</html>
