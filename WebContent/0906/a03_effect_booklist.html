@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+	$('a').click(function(){
+		event.preventDefault();
+		a = $(this).attr('href');
+		$('img').hide(500, function(){
+			$(this).attr('src', a);
+			$(this).show(1000);
+		})
+	})
+})
+</script>
+<style type="text/css">
+	img{
+		width : 250px;
+		height : 250px;
+	}
+</style>
+</head>
+<body>
+<h3>교재목록</h3>
+<ul>
+	<li><a href="../images/jQuery.jpg">jQuery 교재</a></li>
+	<li><a href="../images/JSP2_1.jpg">JSP 교재</a></li>
+	<li><a href="../images/UML.jpg">UML 교재</a></li>
+	<li><a href="../images/coffee.gif">커피즐기기 교재</a></li>
+	<li><a href="../images/image.4.jpg">동물 키우기 교재</a></li>
+	<li><a href="../images/Tulips.jpg">식물 키우기 교재</a></li>
+</ul>
+<br>
+<br>
+<img src="../images/noImage.png">
+</body>
+</html>

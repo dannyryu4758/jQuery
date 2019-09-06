@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+	$('#show').click(function(){
+// 		$('img').show('fast');
+// 		$('img').show(4000, 'swing');
+// 		alert("코알라가 나타났다!!!!"); // 사진보다 먼저 alert가 나타난다.
+		$('img').show(4000, 'swing', function(){	// 사진나온 후에 alert가 적용된다.
+			alert("코알라가 나타났다!!");
+		})
+	})
+	$('#hide').click(function(){
+		$('img').hide('slow');
+	})
+	$('#toggle').click(function(){
+		$('img').toggle(500);
+	})
+	$('#sup').click(function(){
+		$('img').slideUp(500);
+	})
+	$('#sdown').click(function(){
+		$('img').slideDown(500);
+	})
+	$('#stoggle').click(function(){
+		$('img').slideToggle(500);
+	})
+	$('#fin').click(function(){
+		$('img').fadeIn(500);
+	})
+	$('#fout').click(function(){
+		$('img').fadeOut(1000);
+	})
+	$('#fto').click(function(){
+		$('img').fadeTo(1000, 0.3);
+	})
+	$('#ftoggle').click(function(){
+		$('img').fadeToggle();
+	})
+})
+</script>
+<style type="text/css">
+	div{
+		background : #dfdfdf
+	}
+	img{
+		width : 200px;
+		height : 200x;
+	}
+</style>
+</head>
+<body>
+	<div>
+		<button type="button" id="show">show</button>
+		<button type="button" id="hide">hide</button>
+		<button type="button" id="toggle">toggle</button>
+		<br>
+		<button type="button" id="sup">slideUp</button>
+		<button type="button" id="sdown">slideDown</button>
+		<button type="button" id="stoggle">slideToggle</button>
+		<br>
+		<button type="button" id="fin">fadeIn</button>
+		<button type="button" id="fout">fadeOut</button>
+		<button type="button" id="fto">fadeTo</button>
+		<button type="button" id="ftoggle">fadeToggle</button>
+		<br><br>
+		<img src = "../images/Koala.jpg"/>
+	</div>
+</body>
+</html>

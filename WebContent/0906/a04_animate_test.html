@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+	$('#right').click(function(){
+		$('#img1').animate({left:'+=100px'}, 500);
+	})
+	
+	$('#left').click(function(){
+		$('#img1').animate({left:'-=100px'}, 500);
+		
+	})
+	$('#start').click(function(){
+		setInterval(() => {
+			$('#img2').animate({left : '+=500px'}, 500)
+					  .delay(500)
+			          .animate({opacity:'-=0.8'}, 500)
+					  .delay(500)
+					  .animate({left:'-=500px'}, 500)
+					  .delay(500)
+					  .animate({opacity:'1'}, 500);
+		}, 1000);
+	})
+	
+	$('#run').click(function(){
+		$('div').animate({left:'+=200px'}, 500)
+				.delay(500)
+				.queue(function(){
+					// css() 활용 색 변경
+					$(this).css('background', 'red');
+					$(this).dequeue();
+				})
+				.delay(500)
+				.animate({left:'-=200px'}, 500)
+				.delay(500)
+				.queue(function(){
+					// css() 활용 색 변경
+					$(this).css('background', 'green');
+					$(this).dequeue();
+				})
+	})
+	
+	$('#size').click(function(){
+		setInterval(() => {
+			$('p').animate({left : '+=200px'}, 500)
+				  .animate({fontSize : '+=50px'},500)
+				  .queue(function(){
+					  r = Math.floor(Math.random()*255);
+					  g = Math.floor(Math.random()*255);
+					  b = Math.floor(Math.random()*255);
+					  $(this).css('color', 'rgb('+r+','+g+','+b+')');
+					  $(this).dequeue();
+				  })
+				  .animate({left : '-=200px'}, 500)
+				  .animate({fontSize : '-=50px'},500)
+				  .queue(function(){
+					  r = Math.floor(Math.random()*255);
+					  g = Math.floor(Math.random()*255);
+					  b = Math.floor(Math.random()*255);
+					  $(this).css('color', 'rgb('+r+','+g+','+b+')');
+					  $(this).dequeue();
+				  })
+		}, 1000);
+	})
+})
+</script>
+<style type="text/css">
+	img{
+		width:300px; 
+		height:300px;
+		position: relative;
+	}
+	div{
+		position: relative;
+		width : 50px;
+		height : 50px;
+		background: green;
+		border : none;
+	}
+	p{
+		position: relative;
+	}
+</style>
+</head>
+<body>
+	<img id="img1" id="dog" src="../images/PIA16684_ip.jpg"/><br/>
+    <button id="right" type="button">오른쪽으로 이동</button>
+    <button id="left" type="button">왼쪽으로 이동</button>
+    <br>
+    <hr>
+    <img id="img2" src = "../images/PIA16684_ip.jpg"/><br>
+    <button id="start" type="button">실행버튼</button>
+    <hr>
+    <div></div>
+    <button id="run" type="button">색변경</button>
+    <hr>
+    <p>Hello~~~</p>
+    <button id="size" type="button">글자변경</button>
+</body>
+</html>
