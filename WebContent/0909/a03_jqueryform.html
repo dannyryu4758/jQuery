@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+	$('#btn1').on('click', function(){
+		// id 와 name 값을 가져온다. - val()
+// 		vid = $('#id').val();
+// 		vname = $('#name').val();
+
+		console.log($('#ff1').serializeArray());
+		console.log($('#ff1').serialize());
+		// serialize()를 사용
+		// ==> 입력한 값 가져오는 코드와 전송되는 데이터를 구성하는 코드가 필요없다.
+		// 위에 있는 	vid = $('#id').val(); , vname = $('#name').val(); 을 대신한다.
+		// * 대신 form 태그 안에 요소들의 name 속성이 반드시 필요하다.
+		$.ajax({
+			url : 'a02-1_formData.jsp',
+			type : 'post',
+			data : $('#ff1').serializeArray(),
+			/* data : $('#ff1').serialize(),  // == data = "id="+vid+"&name="+vname;  */
+			/* data : {"id" : vid, "name" : vname}, */
+			success : function(result){
+				code = "<span>" + result.id + "</span><br>";
+				code += result.name;
+				
+				$('#formdata').html(code);
+			},
+			error : function(xhr){
+				alert("상태 : " + xhr.status);
+			},
+			dataType : 'json' // text, xml, html, js
+		})
+	})
+	
+	$('#btn2').on('click', function(){
+		// 단축메뉴 시작
+		$.post(
+			'a03-1_formhtml.jsp',
+			$('#ff2').serializeArray(),
+			function(result){
+				$('#formdata2').html(result);
+			},
+			'html'
+		);
+		// 단축메뉴 종료---------------
+		/*
+		vid = $('#id2').val();
+		vname = $('#name2').val();
+		
+		$.ajax({
+			url : 'a03-1_formhtml.jsp',
+			type : 'post',
+			data : {"id" : vid, "name" : vname},
+			success : function(result){
+				$('#formdata2').html(result);
+			},
+			datatype : 'html'
+		})*/
+	})
+	
+})
+</script>
+<style type="text/css">
+	span{
+		color:red;
+	}
+</style>
+</head>
+<body>
+	<div>
+		<form id="ff1">
+			id : <input id="id" name="id" type="text"><br>
+			name : <input id="name" name="name" type="text"><br>
+			<input id="btn1" type="button" value="전송">
+		</form>
+	</div>
+	
+	<br><br>
+	
+	<div id="formdata"></div>
+	<br><br>
+	
+	<hr>
+	
+		<div>
+		<form id="ff2">
+			id : <input id="id2" type="text"><br>
+			name : <input id="name2" type="text"><br>
+			<input id="btn2" type="button" value="전송">
+		</form>
+	</div>
+	
+	<br><br>
+	
+	<div id="formdata2"></div>
+</body>
+</html>

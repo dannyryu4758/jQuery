@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+	$('input[type=button]').on('click', function(){
+		// id 와 name 값을 가져온다. - val()
+		vid = $('#id').val();
+		vname = $('#name').val();
+		
+		xhr = new XMLHttpRequest();
+		
+		// post 방식 요청
+		xhr.open("POST", "a02-1_formData.jsp", true);
+		
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")	
+		data = "id="+vid+"&name="+vname;  // "보내는 데이터 ""안에는 띄어쓰기 금지 
+		xhr.send(data);
+		
+		// 응답
+		xhr.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200){
+				result = JSON.parse(this.responseText);
+				code = "";
+				code += result.id + "<br>";
+				code += result.name;
+				$('#formdata').html(code);
+			}
+		}
+	})
+})
+</script>
+</head>
+<body>
+<div>
+	<div>
+		<form>
+			id : <input id="id" type="text"><br>
+			name : <input id="name" type="text"><br>
+			<input type="button" value="전송">
+		</form>
+	</div>
+	
+	<br><br>
+	
+	<div id="formdata"></div>
+	<br>
+	<br>
+	<hr>
+	<form action="a02-2_formsubmit.jsp" methot ="post">
+		id : <input id="id" type="text" name="id"><br>
+		name : <input id="name" type="text" name="name"><br>
+		<input type="submit" value="전송">
+	</form>
+</div>
+</body>
+</html>

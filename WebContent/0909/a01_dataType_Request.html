@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+	xhr = new XMLHttpRequest();
+	
+	// ==========================================================
+	
+	$('#text').on('click', function(){
+		// 요청 : get방식
+		xhr.open("GET", "a01-1_textData.jsp", true); // true, false ==> 동기화 여부 (true->비동기처리)
+		xhr.send();
+		
+		// 응답
+		xhr.onreadystatechange = function(){
+			console.log(this.readyState);
+			if(this.readyState == 4 && this.status ==200){
+				result = this.responseText;
+				// 홍길동/개나리/진달래/무궁화/수선화/리알락
+				
+				result = result.split("/"); // result 배열로 반환한다.
+				code = "<ul>";
+// 				for(i=0; i<result.length; i++){}
+// 				$each(result, function(){})
+				$(result).each(function(i){
+					code += "<li>" + result[i] + "</li>";
+				})
+				code += "</ul>";
+				$('#text_res').html(code);
+			}
+		}
+	})
+	
+	// ==========================================================
+	
+	$('#arr').on('click', function(){	// 요청, 응답 코드 순서는 상관없다.
+		// 응답
+		xhr.onreadystatechange = function(){
+			if(this.readyState ==4 && this.status==200){
+				result = JSON.parse(this.responseText); // json배열
+				code = "<ol>";
+				$.each(result, function(i){
+					code += "<li>" + result[i] +"</il>";
+				})
+				code += "</ol>";
+				$('#arr_res').html(code);
+			}
+		}
+		
+		// 요청
+		xhr.open("GET", "a01-2_arr.jsp", true);
+		xhr.send();
+	})
+	
+	// ==========================================================
+	$('#obj').on('click', function(){
+		// 요청
+		xhr.open("GET", "a01-3_obj.jsp", true);
+		xhr.send();
+		
+		// 응답
+		xhr.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200){
+				result = JSON.parse(this.responseText);
+				
+				code = "아이디 : " + result.id + "<br>";
+				code += "이름 : " + result.name + "<br>";
+				code += "전화번호 : " + result.tel + "<br>";
+				code += "주소 : " + result.addr;
+				
+				$('#obj_res').html(code);
+			}
+		}
+	})
+	
+	// ==========================================================
+		
+	$('#objarr').on('click', function(){
+		xhr.open("GET", "a01-4_obj_arr.jsp", true);
+		xhr.send();
+		
+		xhr.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200){
+				result = JSON.parse(this.responseText);
+				
+				code = "";
+				$.each(result, function(i){
+					code += (i+1) + "번째 데이터 <br>";
+					code += "아이디 : " + result[i].id + "<br>";
+					code += "이름 : " + result[i].name + "<br>";
+					code += "전화번호 : " + result[i].tel + "<br>";
+					if(i<result.length-1){
+						code += "주소 : " + result[i].addr + "<br><br>";
+					} else {
+						code += "주소 : " + result[i].addr;
+					}
+				})
+				$('#obj_arr_res').html(code);
+			}
+		}
+	})
+	
+	
+})
+</script>
+<style type="text/css">
+	div{
+		width : 200px;
+		float : left;
+	}
+</style>
+</head>
+<body>
+<pre>
+/* -----readyState-----------------------
+0 : open()메서드 수행전
+1 : 로딩중
+2 : 로딩완료
+3 : 서버처리중
+4 : 서버처리끝
+-----  서버의 처리결과status--------
+200 : 성공
+403 : 접근거부
+404 : 파일/페이지 없음
+-----------------------------------*/
+
+var xhttp = new XMLHttpRequest();
+
+//요청 get-----------------------------------------------
+ xhttp.open("GET", "textData.jsp?name=홍길동", true);
+ xhttp.send();   //get일때는 url에 쿼리스트링으로
+
+//요청post---------------------------------------------------
+ data = "name=korea&age=15“;
+ xhttp.open("POST", "first.jsp", true);
+ xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+ xhttp.send(data);
+  
+//응답-------------------------------------------------
+ xhttp.onreadystatechange = function() {
+   if (this.readyState == 4 && this.status == 200) {
+       res = this.responseText;
+       resjson = JSON.parse(res);  
+   }
+ }
+	
+</pre>
+	<button type="button" id="text">TextData</button>
+	<button type="button" id="arr">Array</button>
+	<button type="button" id="obj">JObject</button>
+	<button type="button" id="objarr">ObjArray</button>
+	<br><br>
+	<div id="text_res"></div>
+	<div id="arr_res"></div>
+	<div id="obj_res"></div>
+	<div id="obj_arr_res"></div>
+</body>
+</html>
