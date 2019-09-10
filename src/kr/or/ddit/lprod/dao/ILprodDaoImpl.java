@@ -1,6 +1,7 @@
 package kr.or.ddit.lprod.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -25,7 +26,6 @@ public class ILprodDaoImpl implements ILprodDao {
 
 	@Override
 	public List<LprodVO> selectAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		return smc.queryForList("lprod.getLprodAll");
 	}
 }

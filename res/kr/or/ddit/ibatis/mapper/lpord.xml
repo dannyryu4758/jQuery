@@ -6,6 +6,8 @@
 <!-- namespace 속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->
 <sqlMap namespace="lpord">
 
-
+	<select id="getLprodAll" resultClass="lprodVO">
+		select * from lprod
+	</select>
 
 </sqlMap>
