@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel ="stylesheet" href="../css/mystyle.css">
+<script type="text/javascript">
+$(function(){
+	$('button').on('click', function(){
+		$.ajax({
+			url : '/jqpro/MemberList',
+			type : 'get',
+			success : function(result){
+				code="<table border='1'>";
+				code+="<tr><td>아이디</td><td>이름</td>";
+				code+="<td>전화번호</td><td>이메일</td>";
+				code+="<td>주소</td></tr>";
+				$.each(result, function(i, v){
+					code+="<tr><td>"+v.id+"</td><td>"+v.name+"</td>";
+					code+="<td>"+v.tel+"</td><td>"+v.mail+"</td>";
+					code+="<td>"+v.addr+"</td></tr>";
+				})
+				code+="</table>";
+				$('div').html(code);
+			},
+			error : function(xhr){
+				alert("상태 : " + xhr.status);
+			},
+			dataType : 'json'
+		})
+	})
+})
+</script>
+<style type="text/css">
+	td{
+		width : 150px;
+		height : 30px;
+	}
+</style>
+</head>
+<body>
+	<button type="button">memberlist</button>
+	<br>
+	<br>
+	<div></div>
+</body>
+</html>
