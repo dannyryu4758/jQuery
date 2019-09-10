@@ -21,7 +21,7 @@
 	형식) <typeAlias alias="alias명" type="클래스의 풀네임"/>
 	 -->
 	<typeAlias alias="memVO" type="kr.or.ddit.member.vo.MemberVO"/>
-	<typeAlias alias="lprodVO" type="kr.or.ddit.lpord.vo.LprodVO"/>
+	<typeAlias alias="lprodVO" type="kr.or.ddit.lprod.vo.LprodVO"/>
 <!-- 	<typeAlias alias="memVO" type="ibatis.member.vo.MemberVO"/> -->
 
 	<!-- 
