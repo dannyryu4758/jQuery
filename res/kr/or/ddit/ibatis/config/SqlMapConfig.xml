@@ -20,9 +20,10 @@
 	표시하기 위해서 alias를 지정할 수 있다.
 	형식) <typeAlias alias="alias명" type="클래스의 풀네임"/>
 	 -->
+<!-- 	<typeAlias alias="memVO" type="ibatis.member.vo.MemberVO"/> -->
 	<typeAlias alias="memVO" type="kr.or.ddit.member.vo.MemberVO"/>
 	<typeAlias alias="lprodVO" type="kr.or.ddit.lprod.vo.LprodVO"/>
-<!-- 	<typeAlias alias="memVO" type="ibatis.member.vo.MemberVO"/> -->
+	<typeAlias alias="buyerVO" type="kr.or.ddit.buyer.vo.BuyerVO"/>
 
 	<!-- 
 	DB와의 연결을 처리하는 부분
@@ -48,6 +49,7 @@
 	Mapper 연결-->
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/member.xml"/>
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/lprod.xml"/>
+	<sqlMap resource="kr/or/ddit/ibatis/mapper/buyer.xml"/>
 </sqlMapConfig>
 
 

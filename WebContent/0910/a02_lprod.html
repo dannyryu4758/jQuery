@@ -13,8 +13,8 @@ $(function(){
 			type : 'get',
 			success : function(result){
 				code ="<table border='1'>";
-				code+="<tr><td>LPROD_ID</td><td>LPROD_GU</td>";
-				code+="<td>LPROD_NM</td></tr>";
+				code+="<tr><th>LPROD_ID</th><th>LPROD_GU</th>";
+				code+="<th>LPROD_NM</th></tr>";
 				$.each(result, function(i,v){
 					code+="<tr><td>"+v.id+"</td><td>"+v.gu+"</td>";
 					code+="<td>"+v.nm+"</td></tr>";

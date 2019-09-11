@@ -9,7 +9,7 @@ import kr.or.ddit.lprod.vo.LprodVO;
 
 public class ILprodServiceImpl implements ILprodService{
 	private ILprodDao dao;
-	private static ILprodServiceImpl service;
+	private static ILprodService service;
 		
 	private ILprodServiceImpl() {
 		dao = ILprodDaoImpl.getInstance();
