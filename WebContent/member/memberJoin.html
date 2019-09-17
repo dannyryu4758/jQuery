@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('#idcheck').on('click', function(){
+		idvalue = $('#id').val();
+		$.ajax({
+			url : '/jqpro/checkId',
+			type : 'post',
+			data : {"id" : idvalue},
+			dataType : 'json',
+			success : function(res){
+				$('#spanid').html(res.result).css('color', 'red');
+			},
+			error: function(xhr){
+				alert("상태 : " + xhr.status);
+			}
+		})
+	})
+	
+	$('#dongbtn').on('click', function(){
+		dongvalue = $('#dong').val();
+		$.ajax({
+			url : '/jqpro/SelectDong',
+			type : 'post',
+			data : {"dong" : dongvalue},
+			dataType : 'json',
+			success : function(res){
+				code = "<table class='table table-striped'>";
+				$.each(res, function(i,v){
+					code += "<tr>";
+					code += "<td>" + v.zipcode + "</td>";
+					code += "<td>" + v.add + "</td>";
+					code += "<td>" + v.bunji + "</td>";
+					code += "</tr>";
+				})
+				code +="</table>";
+				$('#result').html(code);
+			},
+			error : function(xhr){
+				alert("상태 : " + xhr.status);
+			}
+		})
+	})
+})
+</script>
+ <style>
+  .container{text-align:center;   }
+  .form-horizontal{  width:100%;   box-sizing:border-box; } 
+	  
+   fieldset {border: 10px solid #cacace; background: #fff; width:90%;} 
+  
+	.form-group {
+	        text-align:left; 
+	        padding: 8px; 
+	        border-bottom: 1px dashed #ababab;
+	 }
+	 
+    .form-group label.control-label { 
+	          /* background: #efefef;  */ 
+	          width: 120px;
+	          display: inline-block; 
+	          text-align: center; 
+	          box-sizing:border-box;
+	 }
+	
+	.form-group input {  
+	         box-sizing:border-box;  
+	        margin-left : 20px;
+	        padding: 10px 15px;  
+	        border-radius: 10px; 
+	        border: 0 none;  
+	        border : 1px solid gray;
+	 }
+	.form-group input#addr1, .form-group input#addr2{
+	           width:calc(90% - 127px);
+	           box-sizing:border-box;
+	 }
+	.form-group input.addr{
+	          margin : 5px 20px; 
+	          margin-right: 0px; 
+	}
+	.form-group:last-child {border-bottom: 0 none;} 
+	.form-group .btn{
+		   background:#fff; 
+		   font-weight: bold;
+		   border:1px solid #8888ff; 
+		   color:blue; 
+		   margin-left: 10px;
+		   padding: 5px 10px 8px; 
+		   border-radius: 50px; 
+		 /*   box-sizing:border-box; */
+	 } 
+	
+	.btn-wrap{margin-top:30px; text-align: left;}
+	.btn-wrap .btn{ 
+	        width:20%; 
+	        padding:10px;
+	        font-size:1.0em; 
+	      /*   box-sizing:border-box; */
+	        color: white;
+	        font-weight: bold; 
+	        background: Dodgerblue; 
+	        border:  none;  
+	        border-radius: 50px;
+	  }
+	.btn-wrap .btn.btn-default{background: DimGray;}
+  </style>
+</head>
+<body>
+<div class="container">
+<h1>회원가입</h1>
+
+<form class="form-horizontal" action="aa.jsp" method="post" name="ff">
+	 <fieldset> 
+		
+	   <div class="form-group">
+	      <label class="control-label" for="id">아이디:</label>
+	        <input type="text" class="form-control" id="id" placeholder="" name="id">
+	      <button type="button" class="btn col-sm-1" id="idcheck">중복검사</button>
+	      <span id="spanid"></span>
+	    </div>
+	   
+	   
+		 <div class="form-group">
+	      <label class="control-label" for="name">이름:</label>
+	        <input type="text" class="form-control" id="name" placeholder="" name="name">
+	    </div>
+	    
+	    <div class="form-group">
+	      <label class="control-label" for="birth">생년월일:</label>
+	        <input type="date" class="form-control" id="birth" placeholder="" name="birth">
+	    </div>
+		  
+	    
+	    <div class="form-group">
+	      <label class="control-label" for="pwd">비밀번호:</label>
+	        <input type="password" class="form-control" id="pwd" placeholder="" name="pwd">
+	    </div>
+	   
+	    <div class="form-group">
+	      <label class="control-label" for="ptel">휴대폰 번호:</label>
+	        <input type="text" class="form-control" id="ptel" placeholder="010-1234-5678" name="ptel">
+	    </div>
+	    
+	    <div class="form-group">
+	      <label class="control-label" for="email">이메일:</label>
+	        <input type="email" class="form-control" id="email" placeholder="abcd123@email.com" name="email">
+	    </div>
+	    
+	    <div class="form-group">
+	      <label class="control-label" for="zip">우편번호</label>
+	         <input type="text" class="form-control addr" id="zip" placeholder="" name="zip" >
+	         <button id="btncode" type="button" class="btn col-sm-1" data-toggle="modal" data-target="#myModal">번호검색</button><br>
+	       <label class="control-label" for="zip">주소:</label> 
+	         <input type="text" class="form-control addr"  id="addr1" placeholder="" name="addr1"><br>
+	        <label class="control-label" for="zip">상세주소:</label> 
+	         <input type="text" class="form-control addr"  id="addr2" placeholder="" name="addr2">
+	    </div>
+	    
+	    
+  </fieldset> 
+    <div class="btn-wrap">        
+        <input type="button" class="btn btn-primary btn-lg" onclick="proc1()" value="제출"> 
+		<input type="reset" class="btn btn-default btn-lg" value="초기화">
+    </div>
+  </form>
+</div>
+
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">우편번호찾기</h4>
+        </div>
+        <div class="modal-body">
+         동이름 입력 <input type = "text" id="dong">
+         <input type="button" value="검색" id="dongbtn">
+         <br><br>
+         <div id="result"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+</body>
+</html>

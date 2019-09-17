@@ -7,6 +7,7 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.or.ddit.ibatis.config.SqlMapClientFactory;
 import kr.or.ddit.member.vo.MemberVO;
+import kr.or.ddit.member.vo.ZipVO;
 
 public class MemberDaoImpl implements IMemberDao {
 	
@@ -28,5 +29,21 @@ public class MemberDaoImpl implements IMemberDao {
 	public List<MemberVO> seletAll() throws SQLException {
 		return smc.queryForList("memberTest.getMemberAll");
 	}
+
+	@Override
+	public String selectById(String mem_id) throws SQLException {
+		return (String) smc.queryForObject("memberTest.selectById", mem_id);
+	}
+
+	@Override
+	public List<ZipVO> selectByDong(String dong) throws SQLException {
+		return smc.queryForList("memberTest.selectByDong", dong);
+	}
+
+	@Override
+	public String insertMember(MemberVO mvo) throws SQLException {
+		return (String) smc.insert("memberTest.insertMember");
+	}
+
 	
 }

@@ -27,6 +27,25 @@
 		select * from member
 	</select>
 	
+	<!-- id 중복검사 -->
+	<select id="selectById" resultClass="String" parameterClass="String">
+		select mem_id from member where mem_id =#mem_id#
+	</select>
+
+	<!-- 우편번호 검색 -->
+	<select id="selectByDong" resultClass="zipVO" parameterClass="String">
+		select * from ziptb where dong like #data#||'%'
+	</select>
+	
+	<!-- 제출(회원가입-DB 저장) -->
+	<insert id="insertMember" parameterClass="memVO">
+		insert into member mem_id, mem_name, mem_bir, mem_pass, mem_hp, mem_mail, mem_zip, mem_add1, mem_add2
+   		values(#mem_id#, #mem_name#, #mem_bir#, #mem_pass#, #mem_hp#, #mem_mail#, #mem_zip#, #mem_add1#, #mem_add2#)
+   		
+   		<selectKey keyProperty="mem_id" resultClass="String">
+   			select mem_id from member where mem_id = #mem_id#
+   		</selectKey>
+	</insert>
 </sqlMap>			
 
 
