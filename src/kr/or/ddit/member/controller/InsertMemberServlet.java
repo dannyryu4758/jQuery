@@ -11,15 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class InsertMemberServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String = request.getParameter("");
-		String = request.getParameter("");
-		String = request.getParameter("");
-		String = request.getParameter("");
-		String = request.getParameter("");
-		String = request.getParameter("");
-		String = request.getParameter("");
-		String = request.getParameter("");
-		String = request.getParameter("");
+		
 	}
 
 }
