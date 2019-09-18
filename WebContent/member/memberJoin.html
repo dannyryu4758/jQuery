@@ -36,7 +36,7 @@ $(function() {
 			success : function(res){
 				code = "<table class='table table-striped'>";
 				$.each(res, function(i,v){
-					code += "<tr>";
+					code += "<tr class='ziptr'>";
 					code += "<td>" + v.zipcode + "</td>";
 					code += "<td>" + v.add + "</td>";
 					code += "<td>" + v.bunji + "</td>";
@@ -44,6 +44,41 @@ $(function() {
 				})
 				code +="</table>";
 				$('#result').html(code);
+			},
+			error : function(xhr){
+				alert("상태 : " + xhr.status);
+			}
+		})
+	})
+	
+	$('#result').on('click', '.ziptr', function(){ // delegate
+		zip = $('td:eq(0)', this).text();
+		add1 = $('td:eq(1)', this).text();	// this가 부모 역할 할 때 $('p',this) 식으로 표현한다. (원래는 $('div p') ==> 이렇게 쓰인다)
+		$('#zip').val(zip);
+		$('#addr1').val(add1);
+// 		$('#dong').val("");
+// 		$('#result').empty();
+		$('#myModal').modal('hide');
+	})
+	
+	$('#myModal').on('hide.bs.modal', function(){	// 모달이 닫힐 때의 이벤트 설정 
+		$('#dong').val("");
+		$('#result').empty();
+	})
+	
+	$('#send').on('click', function(){
+		// 입력한 모든 값을 가져온다.
+		datas = $('#inputForm').serializeArray(); // form 태그 안에 있는 모든 입력 값을 가져 온다.
+		console.log(datas);
+		
+		$.ajax({
+			url : '/jqpro/InsertMember',
+			type : 'post',
+// 			data : $('#inputForm').serializeArray(),
+			data : datas,
+			dataType : 'json',
+			success : function(result){
+				$('#joinspan').html(result.sw).css('color', 'red');
 			},
 			error : function(xhr){
 				alert("상태 : " + xhr.status);
@@ -113,18 +148,23 @@ $(function() {
 	        border-radius: 50px;
 	  }
 	.btn-wrap .btn.btn-default{background: DimGray;}
+	
+	.ziptr:hover {
+		background : lightblue;
+	}
+	
   </style>
 </head>
 <body>
 <div class="container">
 <h1>회원가입</h1>
 
-<form class="form-horizontal" action="aa.jsp" method="post" name="ff">
+<form class="form-horizontal" id="inputForm" name="ff">
 	 <fieldset> 
 		
 	   <div class="form-group">
 	      <label class="control-label" for="id">아이디:</label>
-	        <input type="text" class="form-control" id="id" placeholder="" name="id">
+	        <input type="text" class="form-control" id="id" placeholder="" name="mem_id">
 	      <button type="button" class="btn col-sm-1" id="idcheck">중복검사</button>
 	      <span id="spanid"></span>
 	    </div>
@@ -132,45 +172,46 @@ $(function() {
 	   
 		 <div class="form-group">
 	      <label class="control-label" for="name">이름:</label>
-	        <input type="text" class="form-control" id="name" placeholder="" name="name">
+	        <input type="text" class="form-control" id="name" placeholder="" name="mem_name">
 	    </div>
 	    
 	    <div class="form-group">
 	      <label class="control-label" for="birth">생년월일:</label>
-	        <input type="date" class="form-control" id="birth" placeholder="" name="birth">
+	        <input type="date" class="form-control" id="birth" placeholder="" name="mem_bir">
 	    </div>
 		  
 	    
 	    <div class="form-group">
 	      <label class="control-label" for="pwd">비밀번호:</label>
-	        <input type="password" class="form-control" id="pwd" placeholder="" name="pwd">
+	        <input type="password" class="form-control" id="pwd" placeholder="" name="mem_pass">
 	    </div>
 	   
 	    <div class="form-group">
 	      <label class="control-label" for="ptel">휴대폰 번호:</label>
-	        <input type="text" class="form-control" id="ptel" placeholder="010-1234-5678" name="ptel">
+	        <input type="text" class="form-control" id="ptel" placeholder="010-1234-5678" name="mem_hp">
 	    </div>
 	    
 	    <div class="form-group">
 	      <label class="control-label" for="email">이메일:</label>
-	        <input type="email" class="form-control" id="email" placeholder="abcd123@email.com" name="email">
+	        <input type="email" class="form-control" id="email" placeholder="abcd123@email.com" name="mem_mail">
 	    </div>
 	    
 	    <div class="form-group">
 	      <label class="control-label" for="zip">우편번호</label>
-	         <input type="text" class="form-control addr" id="zip" placeholder="" name="zip" >
+	         <input type="text" class="form-control addr" id="zip" placeholder="" name="mem_zip" >
 	         <button id="btncode" type="button" class="btn col-sm-1" data-toggle="modal" data-target="#myModal">번호검색</button><br>
 	       <label class="control-label" for="zip">주소:</label> 
-	         <input type="text" class="form-control addr"  id="addr1" placeholder="" name="addr1"><br>
+	         <input type="text" class="form-control addr"  id="addr1" placeholder="" name="mem_add1"><br>
 	        <label class="control-label" for="zip">상세주소:</label> 
-	         <input type="text" class="form-control addr"  id="addr2" placeholder="" name="addr2">
+	         <input type="text" class="form-control addr"  id="addr2" placeholder="" name="mem_add2">
 	    </div>
 	    
 	    
   </fieldset> 
     <div class="btn-wrap">        
-        <input type="button" class="btn btn-primary btn-lg" onclick="proc1()" value="제출"> 
-		<input type="reset" class="btn btn-default btn-lg" value="초기화">
+        <input id="send" type="button" class="btn btn-primary btn-lg" value="제출"> 
+        <span id="joinspan"></span>
+		<input id="reset" type="reset" class="btn btn-default btn-lg" value="초기화">
     </div>
   </form>
 </div>

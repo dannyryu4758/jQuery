@@ -42,7 +42,7 @@ public class MemberDaoImpl implements IMemberDao {
 
 	@Override
 	public String insertMember(MemberVO mvo) throws SQLException {
-		return (String) smc.insert("memberTest.insertMember");
+		return (String) smc.insert("memberTest.insertMember", mvo);
 	}
 
 	

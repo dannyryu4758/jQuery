@@ -34,10 +34,20 @@ $(function(){
 			data : {"lprod_gu" : guvalue},
 			dataType : 'json',
 			success : function(result){
+// 				code="";
+// 				$.each(result, function(j,k){
+// 					code += "<option value='" + k.prod_id + "'>" + k.prod_name + "</option>";
+// 				})
+// 				$('#prod').html(code);
+//	=============================================
 				code="";
-				$.each(result, function(j,k){
-					code += "<option value='" + k.prod_id + "'>" + k.prod_name + "</option>";
-				})
+				if(result.sw == "OK"){
+	 				$.each(result.data, function(j,k){
+						code += "<option value='" + k.prod_id + "'>" + k.prod_name + "</option>";
+					})
+				} else if(result.sw=="NO"){
+					code += "<option value='0'>데이터가 없습니다.</option>";
+				}
 				$('#prod').html(code);
 			},
 			error : function(xhr){

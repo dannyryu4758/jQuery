@@ -6,6 +6,7 @@
 [
 	<%
 		List<LprodVO> list = (List) request.getAttribute("list");
+	
 		for(int i=0;i<list.size();i++){
 			LprodVO vo = list.get(i);
 			if(i>0) out.print(",");

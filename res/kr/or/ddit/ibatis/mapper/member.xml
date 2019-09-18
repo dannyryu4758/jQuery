@@ -39,8 +39,12 @@
 	
 	<!-- 제출(회원가입-DB 저장) -->
 	<insert id="insertMember" parameterClass="memVO">
-		insert into member mem_id, mem_name, mem_bir, mem_pass, mem_hp, mem_mail, mem_zip, mem_add1, mem_add2
-   		values(#mem_id#, #mem_name#, #mem_bir#, #mem_pass#, #mem_hp#, #mem_mail#, #mem_zip#, #mem_add1#, #mem_add2#)
+		insert into member(mem_id, mem_pass, 
+                     mem_name, mem_bir,
+                     mem_zip, mem_add1, mem_add2, 
+                     mem_hp, mem_mail)
+     	 values(#mem_id#, #mem_pass#, #mem_name#, #mem_bir#,
+      			#mem_zip#, #mem_add1#, #mem_add2#, #mem_hp#, #mem_mail#)
    		
    		<selectKey keyProperty="mem_id" resultClass="String">
    			select mem_id from member where mem_id = #mem_id#

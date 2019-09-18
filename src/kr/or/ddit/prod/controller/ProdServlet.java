@@ -34,7 +34,8 @@ public class ProdServlet extends HttpServlet {
 		request.setAttribute("prodList", prodList);
 		
 		// 4. jsp 로 이동 prodNameList.jsp
-		String path = "0916/prodNameList.jsp";
+//		String path = "0916/prodNameList.jsp";
+		String path = "0916/prodguList.jsp";
 		request.getRequestDispatcher(path).forward(request, response);
 	}
 
