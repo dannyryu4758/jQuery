@@ -8,10 +8,14 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="../js/regcheck.js"></script>
 <script type="text/javascript">
 $(function() {
 	$('#idcheck').on('click', function(){
 		idvalue = $('#id').val();
+		// id 정규식 채크!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!추가 (통과하면 이하 수행)
+// 		if(!idcheck()) return;
+		
 		$.ajax({
 			url : '/jqpro/checkId',
 			type : 'post',
@@ -28,6 +32,13 @@ $(function() {
 	
 	$('#dongbtn').on('click', function(){
 		dongvalue = $('#dong').val();
+		
+		// 공백체크!!!!!!!!!!!!!!!
+		if(dongvalue.trim().length <= 0){
+			alert("동이름을 입력하세요.")
+			return;
+		}
+		
 		$.ajax({
 			url : '/jqpro/SelectDong',
 			type : 'post',
@@ -71,6 +82,8 @@ $(function() {
 		datas = $('#inputForm').serializeArray(); // form 태그 안에 있는 모든 입력 값을 가져 온다.
 		console.log(datas);
 		
+		// 정규식 체크!!!!!!!!!!!!!!!!!!!!!!!
+		
 		$.ajax({
 			url : '/jqpro/InsertMember',
 			type : 'post',
@@ -79,6 +92,7 @@ $(function() {
 			dataType : 'json',
 			success : function(result){
 				$('#joinspan').html(result.sw).css('color', 'red');
+				$('#result').hide();
 			},
 			error : function(xhr){
 				alert("상태 : " + xhr.status);
@@ -199,7 +213,8 @@ $(function() {
 	    <div class="form-group">
 	      <label class="control-label" for="zip">우편번호</label>
 	         <input type="text" class="form-control addr" id="zip" placeholder="" name="mem_zip" >
-	         <button id="btncode" type="button" class="btn col-sm-1" data-toggle="modal" data-target="#myModal">번호검색</button><br>
+	         <button id="btncode" type="button" class="btn col-sm-1" data-toggle="modal" data-target="#myModal">번호검색</button>
+	         <button id="btnsido" type="button" class="btn col-sm-1" data-toggle="modal" data-target="#myModal">도시검색</button><br>
 	       <label class="control-label" for="zip">주소:</label> 
 	         <input type="text" class="form-control addr"  id="addr1" placeholder="" name="mem_add1"><br>
 	        <label class="control-label" for="zip">상세주소:</label> 
@@ -215,6 +230,8 @@ $(function() {
     </div>
   </form>
 </div>
+
+
 
 <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">

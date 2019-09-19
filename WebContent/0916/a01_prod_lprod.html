@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel ="stylesheet" href="../css/mystyle.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<!-- <link rel ="stylesheet" href="../css/mystyle.css"> -->
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
 <script type="text/javascript">
 $(function(){
 	$.ajax({
@@ -47,6 +47,14 @@ $(function(){
 					})
 				} else if(result.sw=="NO"){
 					code += "<option value='0'>데이터가 없습니다.</option>";
+					
+					noImg = $('<img>', {		// 태그 새로 만들기
+						'src' : '../images/noImage.png',
+						'width' : '200px',
+						'height' : '200px'
+					})	
+					$('#result').empty();
+					$('#result').append(noImg);
 				}
 				$('#prod').html(code);
 			},
