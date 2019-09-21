@@ -16,4 +16,16 @@ public interface IMemberDao {
 	
 	public String insertMember(MemberVO mvo) throws SQLException;
 	
+	public List<ZipVO> selectSido() throws SQLException;
+
+	public List<ZipVO> selectBySido(String sido) throws SQLException;
+	
+	public List<ZipVO> selectGugun(ZipVO zvo) throws SQLException;
+	
+	public List<ZipVO> selectByGugun(ZipVO zvo) throws SQLException;
+	
+	public List<ZipVO> selectDong(ZipVO zvo) throws SQLException;
+	
+	public List<ZipVO> selectByDong2(ZipVO zvo) throws SQLException;
+	
 }

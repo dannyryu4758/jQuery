@@ -50,6 +50,41 @@
    			select mem_id from member where mem_id = #mem_id#
    		</selectKey>
 	</insert>
+	
+	<select id="selectSido" resultClass="zipVO">
+		select distinct sido 
+		from ziptb 
+	</select>
+	
+	<select id="selectBySido" resultClass="zipVO" parameterClass="String">
+		select zipcode, sido, gugun, dong, nvl(bunji, ' ') bunji 
+		from ziptb  
+		where sido = #sido#
+	</select>
+	
+	<select id="selectGugun" resultClass="zipVO" parameterClass="zipVO">
+		select distinct gugun 
+		from ziptb 
+		where sido=#sido#
+	</select>
+	
+	<select id="selectByGugun" resultClass="zipVO" parameterClass="zipVO">
+		select zipcode, sido, gugun, dong, nvl(bunji, ' ') bunji 
+		from ziptb  
+		where sido = #sido# and gugun=#gugun#
+	</select>
+	
+	<select id="selectDong" resultClass="zipVO" parameterClass="zipVO">
+		select distinct nvl(SUBSTR(dong,0,INSTR(dong, ' ')),dong) dong
+		from ziptb 
+		where sido=#sido# and gugun=#gugun# order by 1
+	</select>
+	
+	<select id="selectByDong2" resultClass="zipVO" parameterClass="zipVO">
+		select zipcode, sido, gugun, dong, nvl(bunji, ' ') bunji
+		from ziptb 
+		where sido = #sido# and gugun=#gugun# and dong like #dong#||'%'
+	</select>
 </sqlMap>			
 
 

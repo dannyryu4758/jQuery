@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="../js/jquery-3.4.1.min.js"></script>
+<!-- <script src="../js/jquery-3.4.1.min.js"></script> -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <script src="../js/regcheck.js"></script>
+<!--   <script src="../js/regcheck.js"></script> -->
 <script type="text/javascript">
 $(function() {
 	$('#idcheck').on('click', function(){
@@ -62,6 +62,158 @@ $(function() {
 		})
 	})
 	
+	$.ajax({
+		url : '/jqpro/SelectDong',
+		type : 'get',
+		dataType : 'json',
+		success : function(res){
+			sidocode = "";
+			$.each(res, function(i, sido){
+				sidocode += "<option>"+sido+"<option>";
+			})
+			$('#sido').html(sidocode);
+		},
+		error : function(xhr){
+			alert("상태 : " + xhr.status);
+		}
+	})
+	
+// 	$('#myModal2').on('shown.bs.modal', function(e){	
+// 		$.ajax({
+// 			url : '/jqpro/SelectDong',
+// 			type : 'get',
+// 			dataType : 'json',
+// 			success : function(res){
+// 				sidocode = "";
+// 				$.each(res, function(i, sido){
+// 					sidocode += "<option>"+sido+"<option>";
+// 				})
+// 				$('#sido').html(sidocode);
+// 			},
+// 			error : function(xhr){
+// 				alert("상태 : " + xhr.status);
+// 			}
+// 		})
+// 	})
+
+	
+	$('#sido').on('change', function(){
+		var sido = $('#sido').val();
+		$.ajax({
+			url : '/jqpro/SelectDong',
+			type : 'post',
+			data : {"sido" : sido},
+			dataType : 'json',
+			success : function(res){
+				code = "<table class='table table-striped'>";
+				$.each(res, function(i,v){
+					code += "<tr class='ziptr'>";
+					code += "<td>" + v.zipcode + "</td>";
+					code += "<td>" + v.sido + " "+ v.gugun + " " + v.dong + "</td>";
+					code += "<td>" + v.bunji + "</td>";
+					code += "</tr>";
+				})
+				code +="</table>";
+				$('#result2').html(code);
+			},
+			error : function(xhr){
+				alert("상태 : " + xhr.status);
+			}
+		})
+		$.ajax({
+			url : '/jqpro/SelectDong',
+			type : 'get',
+			data : {"sido" : sido},
+			dataType : 'json',
+			success : function(res){
+				guguncode = "<option>구군<option>";
+				$.each(res, function(i, gugun){
+					guguncode += "<option>"+gugun.gugun+"<option>";
+				})
+				$('#gugun').html(guguncode);
+			},
+			error : function(xhr){
+				alert("상태 : " + xhr.status);
+			}
+		})
+	})
+		
+	$('#gugun').on('change', function(){
+		var gugun = $('#gugun').val();
+		$.ajax({
+			url : '/jqpro/SelectDong',
+			type : 'post',
+			data : {"gugun" : gugun},
+			dataType : 'json',
+			success : function(res){
+				code = "<table class='table table-striped'>";
+				$.each(res, function(i,v){
+					code += "<tr class='ziptr'>";
+					code += "<td>" + v.zipcode + "</td>";
+					code += "<td>" + v.sido + " "+ v.gugun + " " + v.dong + "</td>";
+					code += "<td>" + v.bunji + "</td>";
+					code += "</tr>";
+				})
+				code +="</table>";
+				$('#result2').html(code);
+			},
+			error : function(xhr){
+				alert("상태 : " + xhr.status);
+			}
+		})
+		$.ajax({
+			url : '/jqpro/SelectDong',
+			type : 'get',
+			data : {"gugun" : gugun},
+			dataType : 'json',
+			success : function(res){
+				dongcode = "<option>동<option>";
+				$.each(res, function(i, dong){
+					dongcode += "<option>"+dong.dong+"<option>";
+				})
+				$('#dong2').html(dongcode);
+			},
+			error : function(xhr){
+				alert("상태 : " + xhr.status);
+			}
+		})
+	})
+	
+	$('#dong2').on('change', function(){
+		var dong = $('#dong2').val();
+		$.ajax({
+			url : '/jqpro/SelectDong',
+			type : 'post',
+			data : {"dong2" : dong},
+			dataType : 'json',
+			success : function(res){
+				code = "<table class='table table-striped'>";
+				$.each(res, function(i,v){
+					code += "<tr class='ziptr'>";
+					code += "<td>" + v.zipcode + "</td>";
+					code += "<td>" + v.sido + " "+ v.gugun + " " + v.dong + "</td>";
+					code += "<td>" + v.bunji + "</td>";
+					code += "</tr>";
+				})
+				code +="</table>";
+				$('#result2').html(code);
+			},
+			error : function(xhr){
+				alert("상태 : " + xhr.status);
+			}
+		})
+	})
+	
+	$('#result2').on('click', '.ziptr', function(){ // delegate
+		zip = $('td:eq(0)', this).text();
+		add1 = $('td:eq(1)', this).text();	// this가 부모 역할 할 때 $('p',this) 식으로 표현한다. (원래는 $('div p') ==> 이렇게 쓰인다)
+		$('#zip').val(zip);
+		$('#addr1').val(add1);
+// 		$('#dong').val("");
+// 		$('#result').empty();
+		$('#myModal').modal('hide');
+	})
+	
 	$('#result').on('click', '.ziptr', function(){ // delegate
 		zip = $('td:eq(0)', this).text();
 		add1 = $('td:eq(1)', this).text();	// this가 부모 역할 할 때 $('p',this) 식으로 표현한다. (원래는 $('div p') ==> 이렇게 쓰인다)
@@ -75,6 +227,30 @@ $(function() {
 	$('#myModal').on('hide.bs.modal', function(){	// 모달이 닫힐 때의 이벤트 설정 
 		$('#dong').val("");
 		$('#result').empty();
+	})
+	
+	$('#myModal2').on('hide.bs.modal', function(){	// 모달이 닫힐 때의 이벤트 설정 
+		$('#gugun').empty();
+		$('#dong2').empty();
+		$('#result2').empty();
+// 		$.ajax({
+// 			url : '/jqpro/SelectDong',
+// 			type : 'get',
+// 			data : {"gugun" : gugun},
+// 			dataType : 'json',
+// 			success : function(res){
+// 				dongcode = "<option>동<option>";
+// 				$.each(res, function(i, dong){
+// 					dongcode += "<option>"+dong+"<option>";
+// 				})
+// 				$('#dong2').html(dongcode);
+// 			},
+// 			error : function(xhr){
+// 				alert("상태 : " + xhr.status);
+// 			}
+		
+// 		})
+		
 	})
 	
 	$('#send').on('click', function(){
@@ -214,7 +390,8 @@ $(function() {
 	      <label class="control-label" for="zip">우편번호</label>
 	         <input type="text" class="form-control addr" id="zip" placeholder="" name="mem_zip" >
 	         <button id="btncode" type="button" class="btn col-sm-1" data-toggle="modal" data-target="#myModal">번호검색</button>
-	         <button id="btnsido" type="button" class="btn col-sm-1" data-toggle="modal" data-target="#myModal">도시검색</button><br>
+	         <button id="btnsido" type="button" class="btn col-sm-1" data-toggle="modal" data-target="#myModal2">도시검색</button>
+	         <br><br>
 	       <label class="control-label" for="zip">주소:</label> 
 	         <input type="text" class="form-control addr"  id="addr1" placeholder="" name="mem_add1"><br>
 	        <label class="control-label" for="zip">상세주소:</label> 
@@ -248,6 +425,37 @@ $(function() {
          <input type="button" value="검색" id="dongbtn">
          <br><br>
          <div id="result"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <!-- Modal2 -->
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">우편번호찾기</h4>
+        </div>
+        <div class="modal-body">
+		         <select id="sido">
+		         	<option value=0>시도</option>
+		         </select>
+		         <select id="gugun">
+		         	<option value=0>구군</option>
+		         </select>
+		         <select id="dong2">
+		         	<option value=0>동</option>
+		         </select>
+		         <br><br>
+		         <div id="result2"></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -15,4 +15,16 @@ public interface IMemberService {
 	public List<ZipVO> selectByDong(String dong);
 	
 	public String insertMember(MemberVO mvo);
+	
+	public String[] selectSido()  ;
+
+	public List<ZipVO> selectBySido(String sido)  ;
+	
+	public List<ZipVO> selectGugun(ZipVO zvo)  ;
+	
+	public List<ZipVO> selectByGugun(ZipVO zvo)  ;
+	
+	public List<ZipVO> selectDong(ZipVO zvo)  ;
+	
+	public List<ZipVO> selectByDong2(ZipVO zvo)  ;
 }
