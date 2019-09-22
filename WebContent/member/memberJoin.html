@@ -8,13 +8,15 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<!--   <script src="../js/regcheck.js"></script> -->
+  <script src="../js/regcheck.js"></script>
 <script type="text/javascript">
 $(function() {
 	$('#idcheck').on('click', function(){
-		idvalue = $('#id').val();
+		var idvalue = $('#id').val();
 		// id 정규식 채크!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!추가 (통과하면 이하 수행)
-// 		if(!idcheck()) return;
+		if(!idcheck(idvalue)){
+			return;
+		}
 		
 		$.ajax({
 			url : '/jqpro/checkId',
@@ -255,10 +257,12 @@ $(function() {
 	
 	$('#send').on('click', function(){
 		// 입력한 모든 값을 가져온다.
-		datas = $('#inputForm').serializeArray(); // form 태그 안에 있는 모든 입력 값을 가져 온다.
+		var datas = $('#inputForm').serializeArray(); // form 태그 안에 있는 모든 입력 값을 가져 온다.
 		console.log(datas);
 		
-		// 정규식 체크!!!!!!!!!!!!!!!!!!!!!!!
+		if(!datacheck(datas)){
+			return;
+		}
 		
 		$.ajax({
 			url : '/jqpro/InsertMember',
