@@ -6,7 +6,7 @@ public class BoardVO {
 	private String subject   ;
 	private String writer    ;
 	private String mail      ;
-	private String passwor   ;
+	private String password   ;
 	private String content   ;
 	private int hit	     ;
 	private String wip	     ;
@@ -16,8 +16,8 @@ public class BoardVO {
 	
 	@Override
 	public String toString() {
-		return "BoardVO [seq=" + seq + ", subject=" + subject + ", writer=" + writer + ", mail=" + mail + ", passwor="
-				+ passwor + ", content=" + content + ", hit=" + hit + ", wip=" + wip + ", wdate=" + wdate + "]";
+		return "BoardVO [seq=" + seq + ", subject=" + subject + ", writer=" + writer + ", mail=" + mail + ", password="
+				+ password + ", content=" + content + ", hit=" + hit + ", wip=" + wip + ", wdate=" + wdate + "]";
 	}
 	
 	
@@ -45,11 +45,11 @@ public class BoardVO {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	public String getPasswor() {
-		return passwor;
+	public String getPassword() {
+		return password;
 	}
-	public void setPasswor(String passwor) {
-		this.passwor = passwor;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getContent() {
 		return content;

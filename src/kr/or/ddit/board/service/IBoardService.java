@@ -10,5 +10,6 @@ public interface IBoardService {
 	public List<BoardVO> selectBoard();
 	public List<BoardVO> selectByPage(Map<String, Object> map);
 	public int countList();
+	public int insertBoard(BoardVO bvo);
 	
 }

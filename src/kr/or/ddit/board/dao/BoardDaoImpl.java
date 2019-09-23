@@ -42,4 +42,11 @@ public class BoardDaoImpl implements IBoardDao{
 		return count;
 	}
 
+	@Override
+	public int insertBoard(BoardVO bvo) throws SQLException {
+		int result = 0;
+		result = (int) smc.insert("board.insertBoard");
+		return result;
+	}
+
 }

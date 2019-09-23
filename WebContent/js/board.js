@@ -1,6 +1,8 @@
 /**
  * 
  */
+
+var currentpage = 1;
 readServer = function(cpage){
 	$.ajax({
 		url : "/jqpro/BoardServlet",
@@ -8,7 +10,7 @@ readServer = function(cpage){
 		dataType : 'json',
 		success : function(result){
 			code="<div class='panel-group' id='accordion'>";
-			$.each(result, function(i,v){
+			$.each(result.data, function(i,v){
 				code +=' <div class="panel panel-default">';
 				code +='  <div class="panel-heading">';
 				code +='    <h4 class="panel-title">';
@@ -46,8 +48,42 @@ readServer = function(cpage){
 			    code +=' </div>';
 			})
 			code+="</div>";
-//			$('#accordionList').empty().append(code);
-			$('#accordionList').html(code);
+//			$('#accordionList').html(code);
+			$('#accordionList').empty().append(code);
+			
+			// 페이지 번호 출력
+			// 이전 버튼
+			$('#btngroup').empty();
+			pager ="";
+			if(result.spage > 1){
+				pager += "<ul class='pager'>";
+				pager += "<li class='previous'><a href='#'>이전</a></li>";
+				pager += "</ul>";
+				$(pager).appendTo('#btngroup');
+			}
+			
+			pager = "<ul class='pagination pager'>";
+			for(i=result.spage ; i <= result.epage; i++){
+				if(currentpage == i){
+					pager += "<li class='active'>";
+					pager += "<a class='paging' href='#'>";
+					pager += i + "</a></li>"; 
+				} else {
+					pager += "<li>";
+					pager += "<a class='paging' href='#'>";
+					pager += i + "</a></li>";
+				}
+			}
+			pager += "</ul>";
+			$('#btngroup').append(pager);
+			
+			// 다음버튼
+			if(result.epage < result.tpage){
+				pager = "<ul class='pager'>";
+				pager += "<li class='next'><a href='#'>다음</a></li>";
+				pager += "</ul>";
+				$(pager).appendTo('#btngroup');
+			}
 		},
 		error : function(xhr){
 			alert("상태 " + xhr.status);

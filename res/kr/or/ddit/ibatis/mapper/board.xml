@@ -22,5 +22,14 @@
 	<select id="countList" resultClass="int">
 		select count(*) from board1
 	</select>
+	
+	<insert id="insertBoard" parameterClass="boardVO">
+		insert into board1 
+		values(board1_seq.nextval, #subject#, #writer#,
+				#mail#, #password#, #content#, 0, #wip# #wdate#)
+		<selectKey keyProperty="seq" resultClass="int">
+			select board1_seq.currval from dual
+		</selectKey>
+	</insert>
 
 </sqlMap>

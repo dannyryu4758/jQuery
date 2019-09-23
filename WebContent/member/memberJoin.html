@@ -64,42 +64,30 @@ $(function() {
 		})
 	})
 	
-	$.ajax({
-		url : '/jqpro/SelectDong',
-		type : 'get',
-		dataType : 'json',
-		success : function(res){
-			sidocode = "";
-			$.each(res, function(i, sido){
-				sidocode += "<option>"+sido+"<option>";
-			})
-			$('#sido').html(sidocode);
-		},
-		error : function(xhr){
-			alert("상태 : " + xhr.status);
-		}
-	})
 	
-// 	$('#myModal2').on('shown.bs.modal', function(e){	
-// 		$.ajax({
-// 			url : '/jqpro/SelectDong',
-// 			type : 'get',
-// 			dataType : 'json',
-// 			success : function(res){
-// 				sidocode = "";
-// 				$.each(res, function(i, sido){
-// 					sidocode += "<option>"+sido+"<option>";
-// 				})
-// 				$('#sido').html(sidocode);
-// 			},
-// 			error : function(xhr){
-// 				alert("상태 : " + xhr.status);
-// 			}
-// 		})
-// 	})
+	$('#myModal2').on('shown.bs.modal', function(e){
+		$('#gugun').html("<option>구군</option>");
+		$('#dong2').html("<option>동</option>");
+		$.ajax({
+			url : '/jqpro/SelectDong',
+			type : 'get',
+			dataType : 'json',
+			success : function(res){
+				sidocode = "";
+				$.each(res, function(i, sido){
+					sidocode += "<option>"+sido+"</option>";
+				})
+				$('#sido').html(sidocode);
+			},
+			error : function(xhr){
+				alert("상태 : " + xhr.status);
+			}
+		})
+	})
 
 	
 	$('#sido').on('change', function(){
+		$('#dong2').html("<option>동</option>");
 		var sido = $('#sido').val();
 		$.ajax({
 			url : '/jqpro/SelectDong',
@@ -128,9 +116,9 @@ $(function() {
 			data : {"sido" : sido},
 			dataType : 'json',
 			success : function(res){
-				guguncode = "<option>구군<option>";
+				guguncode = "<option>구군</option>";
 				$.each(res, function(i, gugun){
-					guguncode += "<option>"+gugun.gugun+"<option>";
+					guguncode += "<option>"+gugun.gugun+"</option>";
 				})
 				$('#gugun').html(guguncode);
 			},
@@ -169,9 +157,9 @@ $(function() {
 			data : {"gugun" : gugun},
 			dataType : 'json',
 			success : function(res){
-				dongcode = "<option>동<option>";
+				dongcode = "<option>동</option>";
 				$.each(res, function(i, dong){
-					dongcode += "<option>"+dong.dong+"<option>";
+					dongcode += "<option>"+dong.dong+"</option>";
 				})
 				$('#dong2').html(dongcode);
 			},

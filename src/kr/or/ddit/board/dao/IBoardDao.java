@@ -11,4 +11,5 @@ public interface IBoardDao {
 	public List<BoardVO> selectBoard() throws SQLException;
 	public List<BoardVO> selectByPage(Map<String, Object> map) throws SQLException;
 	public int countList() throws SQLException;
+	public int insertBoard(BoardVO bvo) throws SQLException;
 }
