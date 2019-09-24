@@ -36,21 +36,36 @@ $(function(){
 	
 	// 글쓰기에서 데이터 입력 후 확인 버튼 클릭할때
 	$('#wok').bind('click', function(){
-		indatas = $('#wform').serialize();
-		$.ajax({
-			url : "/jqpro/BoardWriter",
-			type : "post",
-			data : indatas,
-			dataType : "json",
-			success : function(res){
-				readServer(1);
-			},
-			error: function(xhr){
-				console.log("상태 : " + xhr.status);
-			}
-			
-		})
+		writeServer();
+		$('#writeModal').modal('hide');
 	})
+	// 모달창이 닫힐 떄 입력내용을 지운다.
+	$('#writeModal').on('hide.bs.modal', function(){
+		$('.txt').val("");
+	})
+	
+	// 수정, 삭제, 등록 버튼 클릭할 때 
+	$('#accordionList').on('click', '.action' , function(){
+		name = $(this).attr('name');
+		idx = $(this).attr('idx');
+		if(name == "modify"){
+			alert(idx + "번호의 글을 수정합니다.");
+		} else if(name=="delete") {
+			alert(idx + "번호의 글을 삭제합니다.");
+		} else if(name=="reply"){
+// 			alert(idx + "번호의 글에 댓글을 답니다.");
+			//입력한 내용가져오기
+			rtext = $(this).parent().find('.area').val();
+			rname = "qwer1234";
+			//이름 작성
+			replyServer();
+		} else if(name=="list"){
+			// 댓글 목록을 가져오기 위해서 - 글 번호 가져오기
+			bonum = $(this).attr('idx');
+			replyListServer(this)
+		}
+	})
+		
 })
 </script>
 <style type="text/css">
@@ -66,6 +81,11 @@ $(function(){
 	}
 	#divwrite{
 		text-align: right;
+	}
+	.rep{
+		background: #ffd1d2;
+		margin: 3px;
+		padding: 5px;
 	}
 </style>
 </head>
@@ -99,23 +119,23 @@ $(function(){
         <form id="wform" name="wform">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">재목:</label>
-            <input type="text" class="form-control" name="subject" id="subject">
+            <input class="txt" type="text" class="form-control" name="subject" id="subject">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">작성자:</label>
-            <input type="text" class="form-control" name="writer" id="writer">
+            <input class="txt" type="text" class="form-control" name="writer" id="writer">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">비밀번호:</label>
-            <input type="password" class="form-control" name="password" id="password">
+            <input class="txt" type="password" class="form-control" name="password" id="password">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">이메일:</label>
-            <input type="email" class="form-control" name="mail" id="mail">
+            <input class="txt" type="email" class="form-control" name="mail" id="mail">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">내용:</label>
-            <textarea class="form-control" name="content" id="content"></textarea>
+            <textarea class="form-control txt" name="content" id="content"></textarea>
           </div>
         </form>
       </div>

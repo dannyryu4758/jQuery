@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.ReplyVO;
 
 public interface IBoardDao {
 	
@@ -12,4 +13,6 @@ public interface IBoardDao {
 	public List<BoardVO> selectByPage(Map<String, Object> map) throws SQLException;
 	public int countList() throws SQLException;
 	public int insertBoard(BoardVO bvo) throws SQLException;
+	public int insertReply(ReplyVO rvo) throws SQLException;
+	public List<ReplyVO> replyList(int bonum) throws SQLException;
 }

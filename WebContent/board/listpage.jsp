@@ -25,7 +25,7 @@
 				"subject"   : "<%=vo.getSubject()%>",
 				"writer"    : "<%=vo.getWriter()%>",
 				"mail"      : "<%=vo.getMail()%>",
-				"content"   : "<%=vo.getContent()%>",
+				"content"   : "<%=vo.getContent().replaceAll("\r", "").replaceAll("\n", "<br>")%>",
 				"hit"	    : "<%=vo.getHit()%>",
 				"date"	    : "<%=vo.getWdate()%>"
 			}

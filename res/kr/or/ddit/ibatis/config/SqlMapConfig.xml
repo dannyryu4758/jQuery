@@ -27,6 +27,7 @@
 	<typeAlias alias="prodVO" type="kr.or.ddit.prod.vo.ProdVO"/>
 	<typeAlias alias="zipVO" type="kr.or.ddit.member.vo.ZipVO"/>
 	<typeAlias alias="boardVO" type="kr.or.ddit.board.vo.BoardVO"/>
+	<typeAlias alias="replyVO" type="kr.or.ddit.board.vo.ReplyVO"/>
 
 	<!-- 
 	DB와의 연결을 처리하는 부분

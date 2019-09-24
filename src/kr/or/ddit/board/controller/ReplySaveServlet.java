@@ -3,7 +3,6 @@ package kr.or.ddit.board.controller;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,29 +13,26 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
-import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.ReplyVO;
 
-@WebServlet("/BoardWriter")
-public class BoardWriteServlet extends HttpServlet{
+@WebServlet("/ReplySave")
+public class ReplySaveServlet extends HttpServlet{
 	IBoardService service = BoardServiceImpl.getInstance();
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		BoardVO bvo = new BoardVO();
+		req.setCharacterEncoding("UTF-8");
+		ReplyVO rvo = new ReplyVO();
 		try {
-			BeanUtils.populate(bvo, req.getParameterMap());
+			BeanUtils.populate(rvo, req.getParameterMap());
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
+		int re_result = service.insertReply(rvo);
+		req.setAttribute("seq", re_result);
+		String path = "/board/write.jsp";
+		req.getRequestDispatcher(path).forward(req, resp);
 		
-		//ajax에서 보낸 ip를넣어야함
-		bvo.setWip(req.getRemoteAddr());
-		
-		int seq = service.insertBoard(bvo);
-		
-		req.setAttribute("seq", seq);
-		
-	    RequestDispatcher disp = req.getRequestDispatcher("board/write.jsp");
-	    disp.forward(req, resp);
 	}
+	
 }
