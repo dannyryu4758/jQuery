@@ -52,19 +52,75 @@ $(function(){
 			alert(idx + "번호의 글을 수정합니다.");
 		} else if(name=="delete") {
 			alert(idx + "번호의 글을 삭제합니다.");
+			deleteBoardServer(this);
 		} else if(name=="reply"){
 // 			alert(idx + "번호의 글에 댓글을 답니다.");
 			//입력한 내용가져오기
 			rtext = $(this).parent().find('.area').val();
 			rname = "qwer1234";
 			//이름 작성
-			replyServer();
+			replyServer(this); // 댓글 저장
+			bonum = idx;
+			// 댓글 목록
+// 			replyListServer(this);	// this == 등록버튼
 		} else if(name=="list"){
 			// 댓글 목록을 가져오기 위해서 - 글 번호 가져오기
 			bonum = $(this).attr('idx');
-			replyListServer(this)
+			replyListServer(this); // this == 제목줄 a태그
+		} else if(name == "r_modify"){
+			
+			//댓글 수정 클릭시 
+			// modityForm이 열려 있는 걸 닫아야 한다.
+			// body로 modigyForm 을 다시 이동 시켜 놓는다.
+			if($("#modifyForm").css("display")!="none") {
+				replyReset();
+			}
+			renum = idx;
+			modifyCont = $(this).parents('.rep').find('.cont').html();
+			modifyCont = modifyCont.replace("/<br>/g", "\n");
+			
+			$("#modifyForm #test").val(modifyCont);
+			$(this).parents(".rep").find(".cont").empty().append($("#modifyForm"));
+			
+			$("#modifyForm").show();
+			
+		} else if(name == "r_delete"){
+			renum = idx;
+			deleteReplyServer(this);
 		}
 	})
+	// 이미 modifyForm이 열려 있는 상태에서 다시 다른 modifyForm이 열릴떄
+// 	modifyCont = "";
+	replyReset = function(){
+		modispan = $("#modifyForm").parent();
+		$("body").append($("#modifyForm"));
+		$("#modifyForm").hide();
+		
+		modispan.html(modifyCont.replace(/\n/g, "<br>"));
+	}
+	
+	// 댓글 수정Form 에서 확인 버튼 클릭
+	$("#btnOK").on("click", function(){
+		modifyCont = $("#modifyForm #test").val();
+		modispan = $("#modifyForm").parent();
+		$("body").append($("#modifyForm"));
+		$("#modifyForm").hide();
+		modispan.html(modifyCont.replace(/\n/g, "<br>"));
+		
+		// DB 를 수정 : renum, cont 매개변수로 보내야함.
+		updateReplyServer();
+		
+	})
+	
+	modifyCont = $("#modifyForm #test").val();		
+	$("#btnCancel").on("click", function(){
+		modispan = $("#modifyForm").parent();
+		$("body").append($("#modifyForm"));
+		$("#modifyForm").hide();
+		modispan.html(modifyCont.replace(/\n/g, "<br>"));
+	})
+	
+	
 		
 })
 </script>
@@ -90,6 +146,13 @@ $(function(){
 </style>
 </head>
 <body>
+<!-- 댓글 수정을 위한 form -->
+	<div id="modifyForm" style="display:none;">
+		<textarea id="test" class="" rows="5" cols="30"></textarea>
+		<input type="button" value="확인" id="btnOK">
+		<input type="button" value="취소" id="btnCancel">
+	</div>
+	
 	<h2>Accordion Example</h2>
 	<br>
 	<div id="btnwrite">

@@ -14,4 +14,7 @@ public interface IBoardService {
 	public int insertBoard(BoardVO bvo);
 	public int insertReply(ReplyVO rvo);
 	public List<ReplyVO> replyList(int bonum);
+	public int updateReply(ReplyVO rvo);
+	public int deleteReply(int renum);
+	public int deleteBoard(int seq); 
 }

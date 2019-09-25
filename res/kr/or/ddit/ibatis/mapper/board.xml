@@ -46,5 +46,17 @@
 	<select id="replyList" parameterClass="int" resultClass="replyVO">
 		select * from reply where bonum = #bonum#
 	</select>
+	
+	<update id="updateReply" parameterClass="replyVO">
+		update reply set cont = #cont# where renum = #renum#
+	</update>
+	
+	<delete id="deleteReply" parameterClass="int">
+		delete from reply where renum = #renum#
+	</delete>
+	
+	<delete id="deleteBoard" parameterClass="int">
+		delete from board1 where seq = #seq#
+	</delete>
 
 </sqlMap>

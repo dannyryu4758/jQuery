@@ -107,12 +107,7 @@ writeServer = function(){
 		}
 	})
 }
-replyServer = function(){
-	// 입력한 내용
-	
-	// 이름 
-	
-	
+replyServer = function(bb){
 	$.ajax({
 		url :"/jqpro/ReplySave",
 		type : 'post',
@@ -124,6 +119,7 @@ replyServer = function(){
 		dataType : 'json',
 		success : function(res){
 			console.log("댓글" + res.sw);
+			replyListServer(bb);
 		},
 		error : function(xhr){
 			alert("상태 : " + xhr.status);
@@ -132,6 +128,7 @@ replyServer = function(){
 }
 
 replyListServer = function(a){
+	// a: 제목줄의 a태그 또는 등록버튼
 	
 	$(a).parents('.panel').find('.pbody').find('.rep').remove();
 	
@@ -164,4 +161,51 @@ replyListServer = function(a){
 			console.log(errorResp.status);
 		}
 	});
+}
+
+updateReplyServer = function(){
+	$.ajax({
+		url : "/jqpro/updateReply",
+		type : "post",
+		data : {"renum" : renum , "cont" :modifyCont},
+		dataType : "json",
+		success : function(res){
+			alert(res.sw);
+		},
+		error: function(xhr){
+			console.log("상태 : " + xhr.status);
+		}
+	})
+}
+
+deleteReplyServer = function(th){
+	$.ajax({
+		url : "/jqpro/deleteReply",
+		type : "get",
+		data : {"renum" : renum},
+		dataType : "json",
+		success : function(res){
+			alert(res.sw);
+			$(th).parents(".rep").remove();
+		},
+		error: function(xhr){
+			console.log("상태 : " + xhr.status);
+		}
+	})
+}
+
+deleteBoardServer = function(th){
+	$.ajax({
+		url : "/jqpro/deleteBoard",
+		type : "post",
+		data : {"seq" : idx},
+		dataType : "json",
+		success : function(res){
+			alert(res.sw);
+			$(th).parents(".panel-default").remove();
+		},
+		error: function(xhr){
+			console.log("상태 : " + xhr.status);
+		}
+	})
 }

@@ -15,4 +15,7 @@ public interface IBoardDao {
 	public int insertBoard(BoardVO bvo) throws SQLException;
 	public int insertReply(ReplyVO rvo) throws SQLException;
 	public List<ReplyVO> replyList(int bonum) throws SQLException;
+	public int updateReply(ReplyVO rvo) throws SQLException;
+	public int deleteReply(int renum) throws SQLException;
+	public int deleteBoard(int seq) throws SQLException;
 }
