@@ -22,6 +22,7 @@
 			%>
 			{
 				"seq"	    : "<%=vo.getSeq()%>",
+				"password"  : "<%=vo.getPassword() %>",
 				"subject"   : "<%=vo.getSubject()%>",
 				"writer"    : "<%=vo.getWriter()%>",
 				"mail"      : "<%=vo.getMail()%>",

@@ -124,4 +124,27 @@ public class BoardServiceImpl implements IBoardService{
 		return result;
 	}
 
+	@Override
+	public int hitUdateBoard(int seq) {
+		int result = 0;
+		try {
+			int ok = dao.hitUdateBoard(seq);
+			result = dao.selectHit(seq);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public int updateBoard(BoardVO board) {
+		int result = 0;
+		try {
+			result = dao.updateBoard(board);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

@@ -14,22 +14,22 @@ readServer = function(cpage){
 				code +=' <div class="panel panel-default">';
 				code +='  <div class="panel-heading">';
 				code +='    <h4 class="panel-title">';
-				code +='      <a idx="'+v.seq+'" name="list" class="action" data-toggle="collapse" data-parent="#accordion" href="#collapse' +v.seq + '">' + v.subject + '</a>';
+				code +='      <a idx="'+v.seq+'" name="list" class="action" data-toggle="collapse" data-parent="#accordion" href="#collapse' +v.seq + '"><span id="subjectsp">' + v.subject + '<span></a>';
 				code +='</h4>';
 				code +='   </div>';
 				code +='   <div id="collapse' + v.seq + '" class="panel-collapse collapse">';
 				code +='    <div class="panel-body pbody">';
 				code +='      <p style="width:80%; float:left;">';
-				code +='         작성자 :' + v.writer;
+				code +='         작성자 :<span id="writersp">' + v.writer + '</span>';
 				code +='       &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;   ';      
 				code +='        &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;';
-				code +='         이메일 :  ' + v.mail;
+				code +='         이메일 : <span id="mailsp">' + v.mail + '</span>';
 				code +='       &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  ';       
 				code +='        &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;';
-				code +='          작성일 :' + v.date;
+				code +='          작성일 : <span id="date">' + v.date + '</span>';
 				code +='       &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;   ';      
 				code +='        &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;';
-				code +='          조회수 :' + v.hit;
+				code +='          조회수 : <span id="hitsp">' + v.hit + '</span>';
 				code +='       &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  ';       
 				code +='        &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;';
 				code +='      </p>';
@@ -39,7 +39,7 @@ readServer = function(cpage){
 			    code +='      </p>';
 			    code +='      <hr>';
 			    code +='      <p style="width:80%; float:left;">';
-			    code +=     v.content ;
+			    code +=     '<span id="contentsp">' + v.content + '</span>' ;
 			    code +='       </p>';
 			    code +='       <textarea class="area"  cols="80">댓글쓰기댓글쓰기</textarea>';
 			    code +='      <button idx="'+v.seq+'" style="height:45px; width:50px;vertical-align:top;" type="button" name="reply" class="action">등록</button>';
@@ -203,6 +203,40 @@ deleteBoardServer = function(th){
 		success : function(res){
 			alert(res.sw);
 			$(th).parents(".panel-default").remove();
+		},
+		error: function(xhr){
+			console.log("상태 : " + xhr.status);
+		}
+	})
+}
+
+readHitServer = function(th){
+	var hipsp = $(th).parents(".panel-default").find("#hitsp");
+	$.ajax({
+		url : "/jqpro/hitUdateBoard",
+		method : "get",
+		data : {"seq" : bonum},
+		dataType : "json",
+		success : function(resp) {
+			console.log(resp.sw);
+			$(hipsp).html(resp.hit);
+		},
+		error : function(errorResp) {
+			console.log(errorResp.status);
+		}
+	});
+}
+
+
+updateBoardServer = function(th){
+	indatas = $('#wform').serialize();
+	$.ajax({
+		url : "/jqpro/updateBoardServlet",
+		type : "post",
+		data : indatas,
+		dataType : "json",
+		success : function(res){
+			readServer(1);
 		},
 		error: function(xhr){
 			console.log("상태 : " + xhr.status);

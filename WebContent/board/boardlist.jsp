@@ -35,21 +35,38 @@ $(function(){
 	})
 	
 	// 글쓰기에서 데이터 입력 후 확인 버튼 클릭할때
-	$('#wok').bind('click', function(){
-		writeServer();
-		$('#writeModal').modal('hide');
-	})
+// 	$('#wok').bind('click', function(){
+// 		writeServer();
+// 		$('#writeModal').modal('hide');
+// 	})
 	// 모달창이 닫힐 떄 입력내용을 지운다.
 	$('#writeModal').on('hide.bs.modal', function(){
 		$('.txt').val("");
+		$('#wok').attr("id", "wok");
 	})
 	
 	// 수정, 삭제, 등록 버튼 클릭할 때 
+	// 제목(list) 클릭할 때 - 댓글가져오기, 조횟수 증가하기
 	$('#accordionList').on('click', '.action' , function(){
 		name = $(this).attr('name');
 		idx = $(this).attr('idx');
 		if(name == "modify"){
 			alert(idx + "번호의 글을 수정합니다.");
+			$('#writeModal').modal('show');
+			$('#wok').attr("id", "kk");
+			subject = $(this).parents(".panel-default").find("#subjectsp").text();
+			writer = $(this).parents(".panel-default").find("#writersp").text();
+			mail = $(this).parents(".panel-default").find("#mailsp").text();
+			content = $(this).parents(".panel-default").find("#contentsp").text();
+			
+			$("#subject").val(subject);
+			$("#writer").val(writer);
+			$("#mail").val(mail);
+			$("#content").val(content);
+			
+			$('#wok').bind('click', function(event){
+				updateBoardServer();
+			})
 		} else if(name=="delete") {
 			alert(idx + "번호의 글을 삭제합니다.");
 			deleteBoardServer(this);
@@ -67,6 +84,13 @@ $(function(){
 			// 댓글 목록을 가져오기 위해서 - 글 번호 가져오기
 			bonum = $(this).attr('idx');
 			replyListServer(this); // this == 제목줄 a태그
+			
+			// ----- 조회수 증가하기- 조회수+1 update, select------------
+			inclass = $(this).parents(".panel-default").find(".in").attr("class");
+// 			if(typeof inclass == "undefined"){
+			if(!inclass){
+				readHitServer(this);
+			}
 		} else if(name == "r_modify"){
 			
 			//댓글 수정 클릭시 

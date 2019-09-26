@@ -13,24 +13,23 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
-import kr.or.ddit.board.vo.ReplyVO;
+import kr.or.ddit.board.vo.BoardVO;
 
-@WebServlet("/updateReply")
-public class ReplyUpdateServlet extends HttpServlet{
+@WebServlet("/updateBoardServlet")
+public class BoardUpdateServlet extends HttpServlet {
 	IBoardService service = BoardServiceImpl.getInstance();
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ReplyVO rvo = new ReplyVO();
+		BoardVO board = new BoardVO();
 		try {
-			BeanUtils.populate(rvo, req.getParameterMap());
+			BeanUtils.populate(board, req.getParameterMap());
 		} catch (IllegalAccessException | InvocationTargetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int seq = service.updateReply(rvo);
-		req.setAttribute("seq", seq);
+		int result = service.updateBoard(board);
+		req.setAttribute("seq", result);
 		String path = "/board/update.jsp";
 		req.getRequestDispatcher(path).forward(req, resp);
 	}
-	
 }

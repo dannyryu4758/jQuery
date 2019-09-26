@@ -58,5 +58,19 @@
 	<delete id="deleteBoard" parameterClass="int">
 		delete from board1 where seq = #seq#
 	</delete>
+	
+	<update id="hitUdateBoard" parameterClass="int">
+		update board1 set hit = hit + 1 where seq = #seq#
+	</update>
+	
+	<select id="selectHit" parameterClass="int" resultClass="int">
+		select hit from board1 where seq = #seq#
+	</select>
+
+	<update id="updateBoard" parameterClass="boardVO">
+		update board1 set subject = #subject#, writer=#writer#, mail=#mail#, password=#password#, content=#content#
+		where seq = #seq#
+	</update>
+
 
 </sqlMap>

@@ -28,7 +28,7 @@ idcheck = function(idvalue){
 	   return false;
    } 
    
-   var idRegExp = /[가-힣ㄱ-ㅎㅏ-ㅣ]+/g;
+   var idRegExp = /^[가-힣ㄱ-ㅎㅏ-ㅣ]+/g;
    if(idRegExp.test(idvalue)){
 	   alert("아이디의 첫글자는 영문이어야 합니다.");
 	   return false;
